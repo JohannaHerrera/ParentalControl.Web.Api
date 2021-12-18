@@ -1,0 +1,1380 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ParentalControlDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Activity">
+          <Key>
+            <PropertyRef Name="ActivityId" />
+          </Key>
+          <Property Name="ActivityId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InfantAccountId" Type="int" Nullable="false" />
+          <Property Name="ActivityObject" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ActivityDescription" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="ActivityCreationDate" Type="datetime" Nullable="false" />
+          <Property Name="ActivityTimesAccess" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="App">
+          <Key>
+            <PropertyRef Name="AppId" />
+          </Key>
+          <Property Name="AppId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DevicePhoneId" Type="int" />
+          <Property Name="InfantAccountId" Type="int" Nullable="false" />
+          <Property Name="ScheduleId" Type="int" />
+          <Property Name="DevicePCId" Type="int" />
+          <Property Name="AppName" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="AppStatus" Type="bit" />
+          <Property Name="AppAccessPermission" Type="bit" />
+          <Property Name="AppCreationDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AppDevice">
+          <Key>
+            <PropertyRef Name="AppDeviceId" />
+          </Key>
+          <Property Name="AppDeviceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DevicePhoneId" Type="int" />
+          <Property Name="DevicePCId" Type="int" />
+          <Property Name="AppDeviceName" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="AppDeviceCreationDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DevicePC">
+          <Key>
+            <PropertyRef Name="DevicePCId" />
+          </Key>
+          <Property Name="DevicePCId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DevicePCName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DevicePCCode" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DevicePCCreationDate" Type="datetime" Nullable="false" />
+          <Property Name="ParentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DevicePhone">
+          <Key>
+            <PropertyRef Name="DevicePhoneId" />
+          </Key>
+          <Property Name="DevicePhoneId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DevicePhoneName" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="DevicePhoneCode" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DevicePhoneCreationDate" Type="datetime" Nullable="false" />
+          <Property Name="InfantAccountId" Type="int" />
+          <Property Name="ParentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DevicePhoneUse">
+          <Key>
+            <PropertyRef Name="DevicePhoneUseId" />
+          </Key>
+          <Property Name="DevicePhoneUseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DevicePhoneUseDay" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="DevicePhoneCreationDate" Type="datetime" Nullable="false" />
+          <Property Name="DevicePhoneId" Type="int" Nullable="false" />
+          <Property Name="ScheduleId" Type="int" />
+        </EntityType>
+        <EntityType Name="DeviceUse">
+          <Key>
+            <PropertyRef Name="DeviceUseId" />
+          </Key>
+          <Property Name="DeviceUseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DeviceUseDay" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="DeviceUseCreationDate" Type="datetime" Nullable="false" />
+          <Property Name="InfantAccountId" Type="int" Nullable="false" />
+          <Property Name="ScheduleId" Type="int" />
+        </EntityType>
+        <EntityType Name="InfantAccount">
+          <Key>
+            <PropertyRef Name="InfantAccountId" />
+          </Key>
+          <Property Name="InfantAccountId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InfantName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="InfantGender" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="InfantCreationDate" Type="datetime" Nullable="false" />
+          <Property Name="ParentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="NewsId" />
+          </Key>
+          <Property Name="NewsId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NewsTitle" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="NewsDescription" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="NewsLink" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="NewsCreateDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Parent">
+          <Key>
+            <PropertyRef Name="ParentId" />
+          </Key>
+          <Property Name="ParentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParentUsername" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ParentEmail" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ParentPassword" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ParentCreationDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Request">
+          <Key>
+            <PropertyRef Name="RequestId" />
+          </Key>
+          <Property Name="RequestId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RequestTypeId" Type="int" Nullable="false" />
+          <Property Name="InfantAccountId" Type="int" Nullable="false" />
+          <Property Name="RequestObject" Type="varchar" MaxLength="100" />
+          <Property Name="RequestTime" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="RequestState" Type="int" Nullable="false" />
+          <Property Name="RequestCreationDate" Type="datetime" Nullable="false" />
+          <Property Name="ParentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RequestType">
+          <Key>
+            <PropertyRef Name="RequestTypeId" />
+          </Key>
+          <Property Name="RequestTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RequestTypeName" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="RequestTypeDescription" Type="varchar" MaxLength="1000" />
+          <Property Name="RequestTypeCode" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="RequestTypeCreationDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="ScheduleId" />
+          </Key>
+          <Property Name="ScheduleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ScheduleStartTime" Type="datetime" Nullable="false" />
+          <Property Name="ScheduleEndTime" Type="datetime" Nullable="false" />
+          <Property Name="ScheduleCreationDate" Type="datetime" Nullable="false" />
+          <Property Name="ParentId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WebCategory">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryName" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="CategoryDescription" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="CategoryCode" Type="varchar" MaxLength="1000" Nullable="false" />
+          <Property Name="CategoryCreationDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WebConfiguration">
+          <Key>
+            <PropertyRef Name="WebConfigurationId" />
+          </Key>
+          <Property Name="WebConfigurationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WebConfigurationAccess" Type="bit" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="InfantAccountId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WindowsAccount">
+          <Key>
+            <PropertyRef Name="WindowsAccountId" />
+          </Key>
+          <Property Name="WindowsAccountId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WindowsAccountName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="WindowsAccountCreationDate" Type="datetime" Nullable="false" />
+          <Property Name="DevicePCId" Type="int" Nullable="false" />
+          <Property Name="InfantAccountId" Type="int" />
+        </EntityType>
+        <Association Name="Activity_InfantAccount_fk01">
+          <End Role="InfantAccount" Type="Self.InfantAccount" Multiplicity="1" />
+          <End Role="Activity" Type="Self.Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InfantAccount">
+              <PropertyRef Name="InfantAccountId" />
+            </Principal>
+            <Dependent Role="Activity">
+              <PropertyRef Name="InfantAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="App_DevicePC_fk01">
+          <End Role="DevicePC" Type="Self.DevicePC" Multiplicity="0..1" />
+          <End Role="App" Type="Self.App" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DevicePC">
+              <PropertyRef Name="DevicePCId" />
+            </Principal>
+            <Dependent Role="App">
+              <PropertyRef Name="DevicePCId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="App_DevicePhone_fk02">
+          <End Role="DevicePhone" Type="Self.DevicePhone" Multiplicity="0..1" />
+          <End Role="App" Type="Self.App" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DevicePhone">
+              <PropertyRef Name="DevicePhoneId" />
+            </Principal>
+            <Dependent Role="App">
+              <PropertyRef Name="DevicePhoneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="App_InfantAccount_fk03">
+          <End Role="InfantAccount" Type="Self.InfantAccount" Multiplicity="1" />
+          <End Role="App" Type="Self.App" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InfantAccount">
+              <PropertyRef Name="InfantAccountId" />
+            </Principal>
+            <Dependent Role="App">
+              <PropertyRef Name="InfantAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="App_Schedule_fk04">
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="0..1" />
+          <End Role="App" Type="Self.App" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schedule">
+              <PropertyRef Name="ScheduleId" />
+            </Principal>
+            <Dependent Role="App">
+              <PropertyRef Name="ScheduleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AppDevice_DevicePC_fk01">
+          <End Role="DevicePC" Type="Self.DevicePC" Multiplicity="0..1" />
+          <End Role="AppDevice" Type="Self.AppDevice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DevicePC">
+              <PropertyRef Name="DevicePCId" />
+            </Principal>
+            <Dependent Role="AppDevice">
+              <PropertyRef Name="DevicePCId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AppDevice_DevicePhone_fk02">
+          <End Role="DevicePhone" Type="Self.DevicePhone" Multiplicity="0..1" />
+          <End Role="AppDevice" Type="Self.AppDevice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DevicePhone">
+              <PropertyRef Name="DevicePhoneId" />
+            </Principal>
+            <Dependent Role="AppDevice">
+              <PropertyRef Name="DevicePhoneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DevicePhone_DevicePhoneUseFk">
+          <End Role="DevicePhone" Type="Self.DevicePhone" Multiplicity="1" />
+          <End Role="DevicePhoneUse" Type="Self.DevicePhoneUse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DevicePhone">
+              <PropertyRef Name="DevicePhoneId" />
+            </Principal>
+            <Dependent Role="DevicePhoneUse">
+              <PropertyRef Name="DevicePhoneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_DevicePC_Parent">
+          <End Role="Parent" Type="Self.Parent" Multiplicity="1" />
+          <End Role="DevicePC" Type="Self.DevicePC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parent">
+              <PropertyRef Name="ParentId" />
+            </Principal>
+            <Dependent Role="DevicePC">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_DeviceUse_InfantAccount">
+          <End Role="InfantAccount" Type="Self.InfantAccount" Multiplicity="1" />
+          <End Role="DeviceUse" Type="Self.DeviceUse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InfantAccount">
+              <PropertyRef Name="InfantAccountId" />
+            </Principal>
+            <Dependent Role="DeviceUse">
+              <PropertyRef Name="InfantAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_DeviceUse_Schedule">
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="0..1" />
+          <End Role="DeviceUse" Type="Self.DeviceUse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schedule">
+              <PropertyRef Name="ScheduleId" />
+            </Principal>
+            <Dependent Role="DeviceUse">
+              <PropertyRef Name="ScheduleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_InfantAccount_Parent">
+          <End Role="Parent" Type="Self.Parent" Multiplicity="1" />
+          <End Role="InfantAccount" Type="Self.InfantAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parent">
+              <PropertyRef Name="ParentId" />
+            </Principal>
+            <Dependent Role="InfantAccount">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Parent_Schedule">
+          <End Role="Parent" Type="Self.Parent" Multiplicity="1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parent">
+              <PropertyRef Name="ParentId" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_WindowsAccount_DevicePC">
+          <End Role="DevicePC" Type="Self.DevicePC" Multiplicity="1" />
+          <End Role="WindowsAccount" Type="Self.WindowsAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DevicePC">
+              <PropertyRef Name="DevicePCId" />
+            </Principal>
+            <Dependent Role="WindowsAccount">
+              <PropertyRef Name="DevicePCId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_WindowsAccount_InfantAccount">
+          <End Role="InfantAccount" Type="Self.InfantAccount" Multiplicity="0..1" />
+          <End Role="WindowsAccount" Type="Self.WindowsAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InfantAccount">
+              <PropertyRef Name="InfantAccountId" />
+            </Principal>
+            <Dependent Role="WindowsAccount">
+              <PropertyRef Name="InfantAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="InfantAccount_DevicePhoneFk">
+          <End Role="InfantAccount" Type="Self.InfantAccount" Multiplicity="0..1" />
+          <End Role="DevicePhone" Type="Self.DevicePhone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InfantAccount">
+              <PropertyRef Name="InfantAccountId" />
+            </Principal>
+            <Dependent Role="DevicePhone">
+              <PropertyRef Name="InfantAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="InfantAccount_WebConfigurationFk">
+          <End Role="InfantAccount" Type="Self.InfantAccount" Multiplicity="1" />
+          <End Role="WebConfiguration" Type="Self.WebConfiguration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InfantAccount">
+              <PropertyRef Name="InfantAccountId" />
+            </Principal>
+            <Dependent Role="WebConfiguration">
+              <PropertyRef Name="InfantAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Parent_DevicePhoneFk">
+          <End Role="Parent" Type="Self.Parent" Multiplicity="1" />
+          <End Role="DevicePhone" Type="Self.DevicePhone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parent">
+              <PropertyRef Name="ParentId" />
+            </Principal>
+            <Dependent Role="DevicePhone">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Request_InfantAccount_fk02">
+          <End Role="InfantAccount" Type="Self.InfantAccount" Multiplicity="1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InfantAccount">
+              <PropertyRef Name="InfantAccountId" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="InfantAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Request_Parent_fk03">
+          <End Role="Parent" Type="Self.Parent" Multiplicity="1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parent">
+              <PropertyRef Name="ParentId" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Request_RequestType_fk01">
+          <End Role="RequestType" Type="Self.RequestType" Multiplicity="1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RequestType">
+              <PropertyRef Name="RequestTypeId" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="RequestTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Schedule_DevicePhoneUseFk">
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="0..1" />
+          <End Role="DevicePhoneUse" Type="Self.DevicePhoneUse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schedule">
+              <PropertyRef Name="ScheduleId" />
+            </Principal>
+            <Dependent Role="DevicePhoneUse">
+              <PropertyRef Name="ScheduleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="WebCategory_WebConfigurationFk">
+          <End Role="WebCategory" Type="Self.WebCategory" Multiplicity="1" />
+          <End Role="WebConfiguration" Type="Self.WebConfiguration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WebCategory">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="WebConfiguration">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ParentalControlDBModelStoreContainer">
+          <EntitySet Name="Activity" EntityType="Self.Activity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="App" EntityType="Self.App" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AppDevice" EntityType="Self.AppDevice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DevicePC" EntityType="Self.DevicePC" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DevicePhone" EntityType="Self.DevicePhone" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DevicePhoneUse" EntityType="Self.DevicePhoneUse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DeviceUse" EntityType="Self.DeviceUse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InfantAccount" EntityType="Self.InfantAccount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="News" EntityType="Self.News" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Parent" EntityType="Self.Parent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Request" EntityType="Self.Request" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RequestType" EntityType="Self.RequestType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Schedule" EntityType="Self.Schedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WebCategory" EntityType="Self.WebCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WebConfiguration" EntityType="Self.WebConfiguration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WindowsAccount" EntityType="Self.WindowsAccount" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="Activity_InfantAccount_fk01" Association="Self.Activity_InfantAccount_fk01">
+            <End Role="InfantAccount" EntitySet="InfantAccount" />
+            <End Role="Activity" EntitySet="Activity" />
+          </AssociationSet>
+          <AssociationSet Name="App_DevicePC_fk01" Association="Self.App_DevicePC_fk01">
+            <End Role="DevicePC" EntitySet="DevicePC" />
+            <End Role="App" EntitySet="App" />
+          </AssociationSet>
+          <AssociationSet Name="App_DevicePhone_fk02" Association="Self.App_DevicePhone_fk02">
+            <End Role="DevicePhone" EntitySet="DevicePhone" />
+            <End Role="App" EntitySet="App" />
+          </AssociationSet>
+          <AssociationSet Name="App_InfantAccount_fk03" Association="Self.App_InfantAccount_fk03">
+            <End Role="InfantAccount" EntitySet="InfantAccount" />
+            <End Role="App" EntitySet="App" />
+          </AssociationSet>
+          <AssociationSet Name="App_Schedule_fk04" Association="Self.App_Schedule_fk04">
+            <End Role="Schedule" EntitySet="Schedule" />
+            <End Role="App" EntitySet="App" />
+          </AssociationSet>
+          <AssociationSet Name="AppDevice_DevicePC_fk01" Association="Self.AppDevice_DevicePC_fk01">
+            <End Role="DevicePC" EntitySet="DevicePC" />
+            <End Role="AppDevice" EntitySet="AppDevice" />
+          </AssociationSet>
+          <AssociationSet Name="AppDevice_DevicePhone_fk02" Association="Self.AppDevice_DevicePhone_fk02">
+            <End Role="DevicePhone" EntitySet="DevicePhone" />
+            <End Role="AppDevice" EntitySet="AppDevice" />
+          </AssociationSet>
+          <AssociationSet Name="DevicePhone_DevicePhoneUseFk" Association="Self.DevicePhone_DevicePhoneUseFk">
+            <End Role="DevicePhone" EntitySet="DevicePhone" />
+            <End Role="DevicePhoneUse" EntitySet="DevicePhoneUse" />
+          </AssociationSet>
+          <AssociationSet Name="fk_DevicePC_Parent" Association="Self.fk_DevicePC_Parent">
+            <End Role="Parent" EntitySet="Parent" />
+            <End Role="DevicePC" EntitySet="DevicePC" />
+          </AssociationSet>
+          <AssociationSet Name="fk_DeviceUse_InfantAccount" Association="Self.fk_DeviceUse_InfantAccount">
+            <End Role="InfantAccount" EntitySet="InfantAccount" />
+            <End Role="DeviceUse" EntitySet="DeviceUse" />
+          </AssociationSet>
+          <AssociationSet Name="fk_DeviceUse_Schedule" Association="Self.fk_DeviceUse_Schedule">
+            <End Role="Schedule" EntitySet="Schedule" />
+            <End Role="DeviceUse" EntitySet="DeviceUse" />
+          </AssociationSet>
+          <AssociationSet Name="fk_InfantAccount_Parent" Association="Self.fk_InfantAccount_Parent">
+            <End Role="Parent" EntitySet="Parent" />
+            <End Role="InfantAccount" EntitySet="InfantAccount" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Parent_Schedule" Association="Self.fk_Parent_Schedule">
+            <End Role="Parent" EntitySet="Parent" />
+            <End Role="Schedule" EntitySet="Schedule" />
+          </AssociationSet>
+          <AssociationSet Name="fk_WindowsAccount_DevicePC" Association="Self.fk_WindowsAccount_DevicePC">
+            <End Role="DevicePC" EntitySet="DevicePC" />
+            <End Role="WindowsAccount" EntitySet="WindowsAccount" />
+          </AssociationSet>
+          <AssociationSet Name="fk_WindowsAccount_InfantAccount" Association="Self.fk_WindowsAccount_InfantAccount">
+            <End Role="InfantAccount" EntitySet="InfantAccount" />
+            <End Role="WindowsAccount" EntitySet="WindowsAccount" />
+          </AssociationSet>
+          <AssociationSet Name="InfantAccount_DevicePhoneFk" Association="Self.InfantAccount_DevicePhoneFk">
+            <End Role="InfantAccount" EntitySet="InfantAccount" />
+            <End Role="DevicePhone" EntitySet="DevicePhone" />
+          </AssociationSet>
+          <AssociationSet Name="InfantAccount_WebConfigurationFk" Association="Self.InfantAccount_WebConfigurationFk">
+            <End Role="InfantAccount" EntitySet="InfantAccount" />
+            <End Role="WebConfiguration" EntitySet="WebConfiguration" />
+          </AssociationSet>
+          <AssociationSet Name="Parent_DevicePhoneFk" Association="Self.Parent_DevicePhoneFk">
+            <End Role="Parent" EntitySet="Parent" />
+            <End Role="DevicePhone" EntitySet="DevicePhone" />
+          </AssociationSet>
+          <AssociationSet Name="Request_InfantAccount_fk02" Association="Self.Request_InfantAccount_fk02">
+            <End Role="InfantAccount" EntitySet="InfantAccount" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+          <AssociationSet Name="Request_Parent_fk03" Association="Self.Request_Parent_fk03">
+            <End Role="Parent" EntitySet="Parent" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+          <AssociationSet Name="Request_RequestType_fk01" Association="Self.Request_RequestType_fk01">
+            <End Role="RequestType" EntitySet="RequestType" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+          <AssociationSet Name="Schedule_DevicePhoneUseFk" Association="Self.Schedule_DevicePhoneUseFk">
+            <End Role="Schedule" EntitySet="Schedule" />
+            <End Role="DevicePhoneUse" EntitySet="DevicePhoneUse" />
+          </AssociationSet>
+          <AssociationSet Name="WebCategory_WebConfigurationFk" Association="Self.WebCategory_WebConfigurationFk">
+            <End Role="WebCategory" EntitySet="WebCategory" />
+            <End Role="WebConfiguration" EntitySet="WebConfiguration" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ParentalControlDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Activity">
+          <Key>
+            <PropertyRef Name="ActivityId" />
+          </Key>
+          <Property Name="ActivityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InfantAccountId" Type="Int32" Nullable="false" />
+          <Property Name="ActivityObject" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ActivityDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ActivityCreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ActivityTimesAccess" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="InfantAccount" Relationship="Self.Activity_InfantAccount_fk01" FromRole="Activity" ToRole="InfantAccount" />
+        </EntityType>
+        <EntityType Name="App">
+          <Key>
+            <PropertyRef Name="AppId" />
+          </Key>
+          <Property Name="AppId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DevicePhoneId" Type="Int32" />
+          <Property Name="InfantAccountId" Type="Int32" Nullable="false" />
+          <Property Name="ScheduleId" Type="Int32" />
+          <Property Name="DevicePCId" Type="Int32" />
+          <Property Name="AppName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AppStatus" Type="Boolean" />
+          <Property Name="AppAccessPermission" Type="Boolean" />
+          <Property Name="AppCreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="DevicePC" Relationship="Self.App_DevicePC_fk01" FromRole="App" ToRole="DevicePC" />
+          <NavigationProperty Name="DevicePhone" Relationship="Self.App_DevicePhone_fk02" FromRole="App" ToRole="DevicePhone" />
+          <NavigationProperty Name="InfantAccount" Relationship="Self.App_InfantAccount_fk03" FromRole="App" ToRole="InfantAccount" />
+          <NavigationProperty Name="Schedule" Relationship="Self.App_Schedule_fk04" FromRole="App" ToRole="Schedule" />
+        </EntityType>
+        <EntityType Name="AppDevice">
+          <Key>
+            <PropertyRef Name="AppDeviceId" />
+          </Key>
+          <Property Name="AppDeviceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DevicePhoneId" Type="Int32" />
+          <Property Name="DevicePCId" Type="Int32" />
+          <Property Name="AppDeviceName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AppDeviceCreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="DevicePC" Relationship="Self.AppDevice_DevicePC_fk01" FromRole="AppDevice" ToRole="DevicePC" />
+          <NavigationProperty Name="DevicePhone" Relationship="Self.AppDevice_DevicePhone_fk02" FromRole="AppDevice" ToRole="DevicePhone" />
+        </EntityType>
+        <EntityType Name="DevicePC">
+          <Key>
+            <PropertyRef Name="DevicePCId" />
+          </Key>
+          <Property Name="DevicePCId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DevicePCName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DevicePCCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DevicePCCreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ParentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="App" Relationship="Self.App_DevicePC_fk01" FromRole="DevicePC" ToRole="App" />
+          <NavigationProperty Name="AppDevice" Relationship="Self.AppDevice_DevicePC_fk01" FromRole="DevicePC" ToRole="AppDevice" />
+          <NavigationProperty Name="Parent" Relationship="Self.fk_DevicePC_Parent" FromRole="DevicePC" ToRole="Parent" />
+          <NavigationProperty Name="WindowsAccount" Relationship="Self.fk_WindowsAccount_DevicePC" FromRole="DevicePC" ToRole="WindowsAccount" />
+        </EntityType>
+        <EntityType Name="DevicePhone">
+          <Key>
+            <PropertyRef Name="DevicePhoneId" />
+          </Key>
+          <Property Name="DevicePhoneId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DevicePhoneName" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DevicePhoneCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DevicePhoneCreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="InfantAccountId" Type="Int32" />
+          <Property Name="ParentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="App" Relationship="Self.App_DevicePhone_fk02" FromRole="DevicePhone" ToRole="App" />
+          <NavigationProperty Name="AppDevice" Relationship="Self.AppDevice_DevicePhone_fk02" FromRole="DevicePhone" ToRole="AppDevice" />
+          <NavigationProperty Name="DevicePhoneUse" Relationship="Self.DevicePhone_DevicePhoneUseFk" FromRole="DevicePhone" ToRole="DevicePhoneUse" />
+          <NavigationProperty Name="InfantAccount" Relationship="Self.InfantAccount_DevicePhoneFk" FromRole="DevicePhone" ToRole="InfantAccount" />
+          <NavigationProperty Name="Parent" Relationship="Self.Parent_DevicePhoneFk" FromRole="DevicePhone" ToRole="Parent" />
+        </EntityType>
+        <EntityType Name="DevicePhoneUse">
+          <Key>
+            <PropertyRef Name="DevicePhoneUseId" />
+          </Key>
+          <Property Name="DevicePhoneUseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DevicePhoneUseDay" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DevicePhoneCreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DevicePhoneId" Type="Int32" Nullable="false" />
+          <Property Name="ScheduleId" Type="Int32" />
+          <NavigationProperty Name="DevicePhone" Relationship="Self.DevicePhone_DevicePhoneUseFk" FromRole="DevicePhoneUse" ToRole="DevicePhone" />
+          <NavigationProperty Name="Schedule" Relationship="Self.Schedule_DevicePhoneUseFk" FromRole="DevicePhoneUse" ToRole="Schedule" />
+        </EntityType>
+        <EntityType Name="DeviceUse">
+          <Key>
+            <PropertyRef Name="DeviceUseId" />
+          </Key>
+          <Property Name="DeviceUseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DeviceUseDay" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DeviceUseCreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="InfantAccountId" Type="Int32" Nullable="false" />
+          <Property Name="ScheduleId" Type="Int32" />
+          <NavigationProperty Name="InfantAccount" Relationship="Self.fk_DeviceUse_InfantAccount" FromRole="DeviceUse" ToRole="InfantAccount" />
+          <NavigationProperty Name="Schedule" Relationship="Self.fk_DeviceUse_Schedule" FromRole="DeviceUse" ToRole="Schedule" />
+        </EntityType>
+        <EntityType Name="InfantAccount">
+          <Key>
+            <PropertyRef Name="InfantAccountId" />
+          </Key>
+          <Property Name="InfantAccountId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InfantName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="InfantGender" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="InfantCreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ParentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Activity" Relationship="Self.Activity_InfantAccount_fk01" FromRole="InfantAccount" ToRole="Activity" />
+          <NavigationProperty Name="App" Relationship="Self.App_InfantAccount_fk03" FromRole="InfantAccount" ToRole="App" />
+          <NavigationProperty Name="DevicePhone" Relationship="Self.InfantAccount_DevicePhoneFk" FromRole="InfantAccount" ToRole="DevicePhone" />
+          <NavigationProperty Name="DeviceUse" Relationship="Self.fk_DeviceUse_InfantAccount" FromRole="InfantAccount" ToRole="DeviceUse" />
+          <NavigationProperty Name="Parent" Relationship="Self.fk_InfantAccount_Parent" FromRole="InfantAccount" ToRole="Parent" />
+          <NavigationProperty Name="WindowsAccount" Relationship="Self.fk_WindowsAccount_InfantAccount" FromRole="InfantAccount" ToRole="WindowsAccount" />
+          <NavigationProperty Name="WebConfiguration" Relationship="Self.InfantAccount_WebConfigurationFk" FromRole="InfantAccount" ToRole="WebConfiguration" />
+          <NavigationProperty Name="Request" Relationship="Self.Request_InfantAccount_fk02" FromRole="InfantAccount" ToRole="Request" />
+        </EntityType>
+        <EntityType Name="News">
+          <Key>
+            <PropertyRef Name="NewsId" />
+          </Key>
+          <Property Name="NewsId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NewsTitle" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NewsDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NewsLink" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NewsCreateDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Parent">
+          <Key>
+            <PropertyRef Name="ParentId" />
+          </Key>
+          <Property Name="ParentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParentUsername" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ParentEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ParentPassword" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ParentCreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="DevicePC" Relationship="Self.fk_DevicePC_Parent" FromRole="Parent" ToRole="DevicePC" />
+          <NavigationProperty Name="DevicePhone" Relationship="Self.Parent_DevicePhoneFk" FromRole="Parent" ToRole="DevicePhone" />
+          <NavigationProperty Name="InfantAccount" Relationship="Self.fk_InfantAccount_Parent" FromRole="Parent" ToRole="InfantAccount" />
+          <NavigationProperty Name="Schedule" Relationship="Self.fk_Parent_Schedule" FromRole="Parent" ToRole="Schedule" />
+          <NavigationProperty Name="Request" Relationship="Self.Request_Parent_fk03" FromRole="Parent" ToRole="Request" />
+        </EntityType>
+        <EntityType Name="Request">
+          <Key>
+            <PropertyRef Name="RequestId" />
+          </Key>
+          <Property Name="RequestId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RequestTypeId" Type="Int32" Nullable="false" />
+          <Property Name="InfantAccountId" Type="Int32" Nullable="false" />
+          <Property Name="RequestObject" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="RequestTime" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="RequestState" Type="Int32" Nullable="false" />
+          <Property Name="RequestCreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ParentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="InfantAccount" Relationship="Self.Request_InfantAccount_fk02" FromRole="Request" ToRole="InfantAccount" />
+          <NavigationProperty Name="Parent" Relationship="Self.Request_Parent_fk03" FromRole="Request" ToRole="Parent" />
+          <NavigationProperty Name="RequestType" Relationship="Self.Request_RequestType_fk01" FromRole="Request" ToRole="RequestType" />
+        </EntityType>
+        <EntityType Name="RequestType">
+          <Key>
+            <PropertyRef Name="RequestTypeId" />
+          </Key>
+          <Property Name="RequestTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RequestTypeName" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RequestTypeDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="RequestTypeCode" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RequestTypeCreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Request" Relationship="Self.Request_RequestType_fk01" FromRole="RequestType" ToRole="Request" />
+        </EntityType>
+        <EntityType Name="Schedule">
+          <Key>
+            <PropertyRef Name="ScheduleId" />
+          </Key>
+          <Property Name="ScheduleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ScheduleStartTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ScheduleEndTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ScheduleCreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ParentId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="App" Relationship="Self.App_Schedule_fk04" FromRole="Schedule" ToRole="App" />
+          <NavigationProperty Name="DevicePhoneUse" Relationship="Self.Schedule_DevicePhoneUseFk" FromRole="Schedule" ToRole="DevicePhoneUse" />
+          <NavigationProperty Name="DeviceUse" Relationship="Self.fk_DeviceUse_Schedule" FromRole="Schedule" ToRole="DeviceUse" />
+          <NavigationProperty Name="Parent" Relationship="Self.fk_Parent_Schedule" FromRole="Schedule" ToRole="Parent" />
+        </EntityType>
+        <EntityType Name="WebCategory">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CategoryDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CategoryCode" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CategoryCreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="WebConfiguration" Relationship="Self.WebCategory_WebConfigurationFk" FromRole="WebCategory" ToRole="WebConfiguration" />
+        </EntityType>
+        <EntityType Name="WebConfiguration">
+          <Key>
+            <PropertyRef Name="WebConfigurationId" />
+          </Key>
+          <Property Name="WebConfigurationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WebConfigurationAccess" Type="Boolean" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="InfantAccountId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="InfantAccount" Relationship="Self.InfantAccount_WebConfigurationFk" FromRole="WebConfiguration" ToRole="InfantAccount" />
+          <NavigationProperty Name="WebCategory" Relationship="Self.WebCategory_WebConfigurationFk" FromRole="WebConfiguration" ToRole="WebCategory" />
+        </EntityType>
+        <EntityType Name="WindowsAccount">
+          <Key>
+            <PropertyRef Name="WindowsAccountId" />
+          </Key>
+          <Property Name="WindowsAccountId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WindowsAccountName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="WindowsAccountCreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DevicePCId" Type="Int32" Nullable="false" />
+          <Property Name="InfantAccountId" Type="Int32" />
+          <NavigationProperty Name="DevicePC" Relationship="Self.fk_WindowsAccount_DevicePC" FromRole="WindowsAccount" ToRole="DevicePC" />
+          <NavigationProperty Name="InfantAccount" Relationship="Self.fk_WindowsAccount_InfantAccount" FromRole="WindowsAccount" ToRole="InfantAccount" />
+        </EntityType>
+        <Association Name="Activity_InfantAccount_fk01">
+          <End Role="InfantAccount" Type="Self.InfantAccount" Multiplicity="1" />
+          <End Role="Activity" Type="Self.Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InfantAccount">
+              <PropertyRef Name="InfantAccountId" />
+            </Principal>
+            <Dependent Role="Activity">
+              <PropertyRef Name="InfantAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="App_DevicePC_fk01">
+          <End Role="DevicePC" Type="Self.DevicePC" Multiplicity="0..1" />
+          <End Role="App" Type="Self.App" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DevicePC">
+              <PropertyRef Name="DevicePCId" />
+            </Principal>
+            <Dependent Role="App">
+              <PropertyRef Name="DevicePCId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="App_DevicePhone_fk02">
+          <End Role="DevicePhone" Type="Self.DevicePhone" Multiplicity="0..1" />
+          <End Role="App" Type="Self.App" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DevicePhone">
+              <PropertyRef Name="DevicePhoneId" />
+            </Principal>
+            <Dependent Role="App">
+              <PropertyRef Name="DevicePhoneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="App_InfantAccount_fk03">
+          <End Role="InfantAccount" Type="Self.InfantAccount" Multiplicity="1" />
+          <End Role="App" Type="Self.App" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InfantAccount">
+              <PropertyRef Name="InfantAccountId" />
+            </Principal>
+            <Dependent Role="App">
+              <PropertyRef Name="InfantAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="App_Schedule_fk04">
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="0..1" />
+          <End Role="App" Type="Self.App" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schedule">
+              <PropertyRef Name="ScheduleId" />
+            </Principal>
+            <Dependent Role="App">
+              <PropertyRef Name="ScheduleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AppDevice_DevicePC_fk01">
+          <End Role="DevicePC" Type="Self.DevicePC" Multiplicity="0..1" />
+          <End Role="AppDevice" Type="Self.AppDevice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DevicePC">
+              <PropertyRef Name="DevicePCId" />
+            </Principal>
+            <Dependent Role="AppDevice">
+              <PropertyRef Name="DevicePCId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AppDevice_DevicePhone_fk02">
+          <End Role="DevicePhone" Type="Self.DevicePhone" Multiplicity="0..1" />
+          <End Role="AppDevice" Type="Self.AppDevice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DevicePhone">
+              <PropertyRef Name="DevicePhoneId" />
+            </Principal>
+            <Dependent Role="AppDevice">
+              <PropertyRef Name="DevicePhoneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_DevicePC_Parent">
+          <End Role="Parent" Type="Self.Parent" Multiplicity="1" />
+          <End Role="DevicePC" Type="Self.DevicePC" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parent">
+              <PropertyRef Name="ParentId" />
+            </Principal>
+            <Dependent Role="DevicePC">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_WindowsAccount_DevicePC">
+          <End Role="DevicePC" Type="Self.DevicePC" Multiplicity="1" />
+          <End Role="WindowsAccount" Type="Self.WindowsAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DevicePC">
+              <PropertyRef Name="DevicePCId" />
+            </Principal>
+            <Dependent Role="WindowsAccount">
+              <PropertyRef Name="DevicePCId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="DevicePhone_DevicePhoneUseFk">
+          <End Role="DevicePhone" Type="Self.DevicePhone" Multiplicity="1" />
+          <End Role="DevicePhoneUse" Type="Self.DevicePhoneUse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DevicePhone">
+              <PropertyRef Name="DevicePhoneId" />
+            </Principal>
+            <Dependent Role="DevicePhoneUse">
+              <PropertyRef Name="DevicePhoneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="InfantAccount_DevicePhoneFk">
+          <End Role="InfantAccount" Type="Self.InfantAccount" Multiplicity="0..1" />
+          <End Role="DevicePhone" Type="Self.DevicePhone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InfantAccount">
+              <PropertyRef Name="InfantAccountId" />
+            </Principal>
+            <Dependent Role="DevicePhone">
+              <PropertyRef Name="InfantAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Parent_DevicePhoneFk">
+          <End Role="Parent" Type="Self.Parent" Multiplicity="1" />
+          <End Role="DevicePhone" Type="Self.DevicePhone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parent">
+              <PropertyRef Name="ParentId" />
+            </Principal>
+            <Dependent Role="DevicePhone">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Schedule_DevicePhoneUseFk">
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="0..1" />
+          <End Role="DevicePhoneUse" Type="Self.DevicePhoneUse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schedule">
+              <PropertyRef Name="ScheduleId" />
+            </Principal>
+            <Dependent Role="DevicePhoneUse">
+              <PropertyRef Name="ScheduleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_DeviceUse_InfantAccount">
+          <End Role="InfantAccount" Type="Self.InfantAccount" Multiplicity="1" />
+          <End Role="DeviceUse" Type="Self.DeviceUse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InfantAccount">
+              <PropertyRef Name="InfantAccountId" />
+            </Principal>
+            <Dependent Role="DeviceUse">
+              <PropertyRef Name="InfantAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_DeviceUse_Schedule">
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="0..1" />
+          <End Role="DeviceUse" Type="Self.DeviceUse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Schedule">
+              <PropertyRef Name="ScheduleId" />
+            </Principal>
+            <Dependent Role="DeviceUse">
+              <PropertyRef Name="ScheduleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_InfantAccount_Parent">
+          <End Role="Parent" Type="Self.Parent" Multiplicity="1" />
+          <End Role="InfantAccount" Type="Self.InfantAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parent">
+              <PropertyRef Name="ParentId" />
+            </Principal>
+            <Dependent Role="InfantAccount">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_WindowsAccount_InfantAccount">
+          <End Role="InfantAccount" Type="Self.InfantAccount" Multiplicity="0..1" />
+          <End Role="WindowsAccount" Type="Self.WindowsAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InfantAccount">
+              <PropertyRef Name="InfantAccountId" />
+            </Principal>
+            <Dependent Role="WindowsAccount">
+              <PropertyRef Name="InfantAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="InfantAccount_WebConfigurationFk">
+          <End Role="InfantAccount" Type="Self.InfantAccount" Multiplicity="1" />
+          <End Role="WebConfiguration" Type="Self.WebConfiguration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InfantAccount">
+              <PropertyRef Name="InfantAccountId" />
+            </Principal>
+            <Dependent Role="WebConfiguration">
+              <PropertyRef Name="InfantAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Request_InfantAccount_fk02">
+          <End Role="InfantAccount" Type="Self.InfantAccount" Multiplicity="1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InfantAccount">
+              <PropertyRef Name="InfantAccountId" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="InfantAccountId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Parent_Schedule">
+          <End Role="Parent" Type="Self.Parent" Multiplicity="1" />
+          <End Role="Schedule" Type="Self.Schedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parent">
+              <PropertyRef Name="ParentId" />
+            </Principal>
+            <Dependent Role="Schedule">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Request_Parent_fk03">
+          <End Role="Parent" Type="Self.Parent" Multiplicity="1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Parent">
+              <PropertyRef Name="ParentId" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Request_RequestType_fk01">
+          <End Role="RequestType" Type="Self.RequestType" Multiplicity="1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RequestType">
+              <PropertyRef Name="RequestTypeId" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="RequestTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="WebCategory_WebConfigurationFk">
+          <End Role="WebCategory" Type="Self.WebCategory" Multiplicity="1" />
+          <End Role="WebConfiguration" Type="Self.WebConfiguration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WebCategory">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="WebConfiguration">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ParentalControlDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Activity" EntityType="Self.Activity" />
+          <EntitySet Name="App" EntityType="Self.App" />
+          <EntitySet Name="AppDevice" EntityType="Self.AppDevice" />
+          <EntitySet Name="DevicePC" EntityType="Self.DevicePC" />
+          <EntitySet Name="DevicePhone" EntityType="Self.DevicePhone" />
+          <EntitySet Name="DevicePhoneUse" EntityType="Self.DevicePhoneUse" />
+          <EntitySet Name="DeviceUse" EntityType="Self.DeviceUse" />
+          <EntitySet Name="InfantAccount" EntityType="Self.InfantAccount" />
+          <EntitySet Name="News" EntityType="Self.News" />
+          <EntitySet Name="Parent" EntityType="Self.Parent" />
+          <EntitySet Name="Request" EntityType="Self.Request" />
+          <EntitySet Name="RequestType" EntityType="Self.RequestType" />
+          <EntitySet Name="Schedule" EntityType="Self.Schedule" />
+          <EntitySet Name="WebCategory" EntityType="Self.WebCategory" />
+          <EntitySet Name="WebConfiguration" EntityType="Self.WebConfiguration" />
+          <EntitySet Name="WindowsAccount" EntityType="Self.WindowsAccount" />
+          <AssociationSet Name="Activity_InfantAccount_fk01" Association="Self.Activity_InfantAccount_fk01">
+            <End Role="InfantAccount" EntitySet="InfantAccount" />
+            <End Role="Activity" EntitySet="Activity" />
+          </AssociationSet>
+          <AssociationSet Name="App_DevicePC_fk01" Association="Self.App_DevicePC_fk01">
+            <End Role="DevicePC" EntitySet="DevicePC" />
+            <End Role="App" EntitySet="App" />
+          </AssociationSet>
+          <AssociationSet Name="App_DevicePhone_fk02" Association="Self.App_DevicePhone_fk02">
+            <End Role="DevicePhone" EntitySet="DevicePhone" />
+            <End Role="App" EntitySet="App" />
+          </AssociationSet>
+          <AssociationSet Name="App_InfantAccount_fk03" Association="Self.App_InfantAccount_fk03">
+            <End Role="InfantAccount" EntitySet="InfantAccount" />
+            <End Role="App" EntitySet="App" />
+          </AssociationSet>
+          <AssociationSet Name="App_Schedule_fk04" Association="Self.App_Schedule_fk04">
+            <End Role="Schedule" EntitySet="Schedule" />
+            <End Role="App" EntitySet="App" />
+          </AssociationSet>
+          <AssociationSet Name="AppDevice_DevicePC_fk01" Association="Self.AppDevice_DevicePC_fk01">
+            <End Role="DevicePC" EntitySet="DevicePC" />
+            <End Role="AppDevice" EntitySet="AppDevice" />
+          </AssociationSet>
+          <AssociationSet Name="AppDevice_DevicePhone_fk02" Association="Self.AppDevice_DevicePhone_fk02">
+            <End Role="DevicePhone" EntitySet="DevicePhone" />
+            <End Role="AppDevice" EntitySet="AppDevice" />
+          </AssociationSet>
+          <AssociationSet Name="fk_DevicePC_Parent" Association="Self.fk_DevicePC_Parent">
+            <End Role="Parent" EntitySet="Parent" />
+            <End Role="DevicePC" EntitySet="DevicePC" />
+          </AssociationSet>
+          <AssociationSet Name="fk_WindowsAccount_DevicePC" Association="Self.fk_WindowsAccount_DevicePC">
+            <End Role="DevicePC" EntitySet="DevicePC" />
+            <End Role="WindowsAccount" EntitySet="WindowsAccount" />
+          </AssociationSet>
+          <AssociationSet Name="DevicePhone_DevicePhoneUseFk" Association="Self.DevicePhone_DevicePhoneUseFk">
+            <End Role="DevicePhone" EntitySet="DevicePhone" />
+            <End Role="DevicePhoneUse" EntitySet="DevicePhoneUse" />
+          </AssociationSet>
+          <AssociationSet Name="InfantAccount_DevicePhoneFk" Association="Self.InfantAccount_DevicePhoneFk">
+            <End Role="InfantAccount" EntitySet="InfantAccount" />
+            <End Role="DevicePhone" EntitySet="DevicePhone" />
+          </AssociationSet>
+          <AssociationSet Name="Parent_DevicePhoneFk" Association="Self.Parent_DevicePhoneFk">
+            <End Role="Parent" EntitySet="Parent" />
+            <End Role="DevicePhone" EntitySet="DevicePhone" />
+          </AssociationSet>
+          <AssociationSet Name="Schedule_DevicePhoneUseFk" Association="Self.Schedule_DevicePhoneUseFk">
+            <End Role="Schedule" EntitySet="Schedule" />
+            <End Role="DevicePhoneUse" EntitySet="DevicePhoneUse" />
+          </AssociationSet>
+          <AssociationSet Name="fk_DeviceUse_InfantAccount" Association="Self.fk_DeviceUse_InfantAccount">
+            <End Role="InfantAccount" EntitySet="InfantAccount" />
+            <End Role="DeviceUse" EntitySet="DeviceUse" />
+          </AssociationSet>
+          <AssociationSet Name="fk_DeviceUse_Schedule" Association="Self.fk_DeviceUse_Schedule">
+            <End Role="Schedule" EntitySet="Schedule" />
+            <End Role="DeviceUse" EntitySet="DeviceUse" />
+          </AssociationSet>
+          <AssociationSet Name="fk_InfantAccount_Parent" Association="Self.fk_InfantAccount_Parent">
+            <End Role="Parent" EntitySet="Parent" />
+            <End Role="InfantAccount" EntitySet="InfantAccount" />
+          </AssociationSet>
+          <AssociationSet Name="fk_WindowsAccount_InfantAccount" Association="Self.fk_WindowsAccount_InfantAccount">
+            <End Role="InfantAccount" EntitySet="InfantAccount" />
+            <End Role="WindowsAccount" EntitySet="WindowsAccount" />
+          </AssociationSet>
+          <AssociationSet Name="InfantAccount_WebConfigurationFk" Association="Self.InfantAccount_WebConfigurationFk">
+            <End Role="InfantAccount" EntitySet="InfantAccount" />
+            <End Role="WebConfiguration" EntitySet="WebConfiguration" />
+          </AssociationSet>
+          <AssociationSet Name="Request_InfantAccount_fk02" Association="Self.Request_InfantAccount_fk02">
+            <End Role="InfantAccount" EntitySet="InfantAccount" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Parent_Schedule" Association="Self.fk_Parent_Schedule">
+            <End Role="Parent" EntitySet="Parent" />
+            <End Role="Schedule" EntitySet="Schedule" />
+          </AssociationSet>
+          <AssociationSet Name="Request_Parent_fk03" Association="Self.Request_Parent_fk03">
+            <End Role="Parent" EntitySet="Parent" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+          <AssociationSet Name="Request_RequestType_fk01" Association="Self.Request_RequestType_fk01">
+            <End Role="RequestType" EntitySet="RequestType" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+          <AssociationSet Name="WebCategory_WebConfigurationFk" Association="Self.WebCategory_WebConfigurationFk">
+            <End Role="WebCategory" EntitySet="WebCategory" />
+            <End Role="WebConfiguration" EntitySet="WebConfiguration" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ParentalControlDBModelStoreContainer" CdmEntityContainer="ParentalControlDBEntities">
+          <EntitySetMapping Name="Activity">
+            <EntityTypeMapping TypeName="ParentalControlDBModel.Activity">
+              <MappingFragment StoreEntitySet="Activity">
+                <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
+                <ScalarProperty Name="InfantAccountId" ColumnName="InfantAccountId" />
+                <ScalarProperty Name="ActivityObject" ColumnName="ActivityObject" />
+                <ScalarProperty Name="ActivityDescription" ColumnName="ActivityDescription" />
+                <ScalarProperty Name="ActivityCreationDate" ColumnName="ActivityCreationDate" />
+                <ScalarProperty Name="ActivityTimesAccess" ColumnName="ActivityTimesAccess" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="App">
+            <EntityTypeMapping TypeName="ParentalControlDBModel.App">
+              <MappingFragment StoreEntitySet="App">
+                <ScalarProperty Name="AppId" ColumnName="AppId" />
+                <ScalarProperty Name="DevicePhoneId" ColumnName="DevicePhoneId" />
+                <ScalarProperty Name="InfantAccountId" ColumnName="InfantAccountId" />
+                <ScalarProperty Name="ScheduleId" ColumnName="ScheduleId" />
+                <ScalarProperty Name="DevicePCId" ColumnName="DevicePCId" />
+                <ScalarProperty Name="AppName" ColumnName="AppName" />
+                <ScalarProperty Name="AppStatus" ColumnName="AppStatus" />
+                <ScalarProperty Name="AppAccessPermission" ColumnName="AppAccessPermission" />
+                <ScalarProperty Name="AppCreationDate" ColumnName="AppCreationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppDevice">
+            <EntityTypeMapping TypeName="ParentalControlDBModel.AppDevice">
+              <MappingFragment StoreEntitySet="AppDevice">
+                <ScalarProperty Name="AppDeviceId" ColumnName="AppDeviceId" />
+                <ScalarProperty Name="DevicePhoneId" ColumnName="DevicePhoneId" />
+                <ScalarProperty Name="DevicePCId" ColumnName="DevicePCId" />
+                <ScalarProperty Name="AppDeviceName" ColumnName="AppDeviceName" />
+                <ScalarProperty Name="AppDeviceCreationDate" ColumnName="AppDeviceCreationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DevicePC">
+            <EntityTypeMapping TypeName="ParentalControlDBModel.DevicePC">
+              <MappingFragment StoreEntitySet="DevicePC">
+                <ScalarProperty Name="DevicePCId" ColumnName="DevicePCId" />
+                <ScalarProperty Name="DevicePCName" ColumnName="DevicePCName" />
+                <ScalarProperty Name="DevicePCCode" ColumnName="DevicePCCode" />
+                <ScalarProperty Name="DevicePCCreationDate" ColumnName="DevicePCCreationDate" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DevicePhone">
+            <EntityTypeMapping TypeName="ParentalControlDBModel.DevicePhone">
+              <MappingFragment StoreEntitySet="DevicePhone">
+                <ScalarProperty Name="DevicePhoneId" ColumnName="DevicePhoneId" />
+                <ScalarProperty Name="DevicePhoneName" ColumnName="DevicePhoneName" />
+                <ScalarProperty Name="DevicePhoneCode" ColumnName="DevicePhoneCode" />
+                <ScalarProperty Name="DevicePhoneCreationDate" ColumnName="DevicePhoneCreationDate" />
+                <ScalarProperty Name="InfantAccountId" ColumnName="InfantAccountId" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DevicePhoneUse">
+            <EntityTypeMapping TypeName="ParentalControlDBModel.DevicePhoneUse">
+              <MappingFragment StoreEntitySet="DevicePhoneUse">
+                <ScalarProperty Name="DevicePhoneUseId" ColumnName="DevicePhoneUseId" />
+                <ScalarProperty Name="DevicePhoneUseDay" ColumnName="DevicePhoneUseDay" />
+                <ScalarProperty Name="DevicePhoneCreationDate" ColumnName="DevicePhoneCreationDate" />
+                <ScalarProperty Name="DevicePhoneId" ColumnName="DevicePhoneId" />
+                <ScalarProperty Name="ScheduleId" ColumnName="ScheduleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DeviceUse">
+            <EntityTypeMapping TypeName="ParentalControlDBModel.DeviceUse">
+              <MappingFragment StoreEntitySet="DeviceUse">
+                <ScalarProperty Name="DeviceUseId" ColumnName="DeviceUseId" />
+                <ScalarProperty Name="DeviceUseDay" ColumnName="DeviceUseDay" />
+                <ScalarProperty Name="DeviceUseCreationDate" ColumnName="DeviceUseCreationDate" />
+                <ScalarProperty Name="InfantAccountId" ColumnName="InfantAccountId" />
+                <ScalarProperty Name="ScheduleId" ColumnName="ScheduleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InfantAccount">
+            <EntityTypeMapping TypeName="ParentalControlDBModel.InfantAccount">
+              <MappingFragment StoreEntitySet="InfantAccount">
+                <ScalarProperty Name="InfantAccountId" ColumnName="InfantAccountId" />
+                <ScalarProperty Name="InfantName" ColumnName="InfantName" />
+                <ScalarProperty Name="InfantGender" ColumnName="InfantGender" />
+                <ScalarProperty Name="InfantCreationDate" ColumnName="InfantCreationDate" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="News">
+            <EntityTypeMapping TypeName="ParentalControlDBModel.News">
+              <MappingFragment StoreEntitySet="News">
+                <ScalarProperty Name="NewsId" ColumnName="NewsId" />
+                <ScalarProperty Name="NewsTitle" ColumnName="NewsTitle" />
+                <ScalarProperty Name="NewsDescription" ColumnName="NewsDescription" />
+                <ScalarProperty Name="NewsLink" ColumnName="NewsLink" />
+                <ScalarProperty Name="NewsCreateDate" ColumnName="NewsCreateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Parent">
+            <EntityTypeMapping TypeName="ParentalControlDBModel.Parent">
+              <MappingFragment StoreEntitySet="Parent">
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="ParentUsername" ColumnName="ParentUsername" />
+                <ScalarProperty Name="ParentEmail" ColumnName="ParentEmail" />
+                <ScalarProperty Name="ParentPassword" ColumnName="ParentPassword" />
+                <ScalarProperty Name="ParentCreationDate" ColumnName="ParentCreationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Request">
+            <EntityTypeMapping TypeName="ParentalControlDBModel.Request">
+              <MappingFragment StoreEntitySet="Request">
+                <ScalarProperty Name="RequestId" ColumnName="RequestId" />
+                <ScalarProperty Name="RequestTypeId" ColumnName="RequestTypeId" />
+                <ScalarProperty Name="InfantAccountId" ColumnName="InfantAccountId" />
+                <ScalarProperty Name="RequestObject" ColumnName="RequestObject" />
+                <ScalarProperty Name="RequestTime" ColumnName="RequestTime" />
+                <ScalarProperty Name="RequestState" ColumnName="RequestState" />
+                <ScalarProperty Name="RequestCreationDate" ColumnName="RequestCreationDate" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RequestType">
+            <EntityTypeMapping TypeName="ParentalControlDBModel.RequestType">
+              <MappingFragment StoreEntitySet="RequestType">
+                <ScalarProperty Name="RequestTypeId" ColumnName="RequestTypeId" />
+                <ScalarProperty Name="RequestTypeName" ColumnName="RequestTypeName" />
+                <ScalarProperty Name="RequestTypeDescription" ColumnName="RequestTypeDescription" />
+                <ScalarProperty Name="RequestTypeCode" ColumnName="RequestTypeCode" />
+                <ScalarProperty Name="RequestTypeCreationDate" ColumnName="RequestTypeCreationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Schedule">
+            <EntityTypeMapping TypeName="ParentalControlDBModel.Schedule">
+              <MappingFragment StoreEntitySet="Schedule">
+                <ScalarProperty Name="ScheduleId" ColumnName="ScheduleId" />
+                <ScalarProperty Name="ScheduleStartTime" ColumnName="ScheduleStartTime" />
+                <ScalarProperty Name="ScheduleEndTime" ColumnName="ScheduleEndTime" />
+                <ScalarProperty Name="ScheduleCreationDate" ColumnName="ScheduleCreationDate" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WebCategory">
+            <EntityTypeMapping TypeName="ParentalControlDBModel.WebCategory">
+              <MappingFragment StoreEntitySet="WebCategory">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+                <ScalarProperty Name="CategoryDescription" ColumnName="CategoryDescription" />
+                <ScalarProperty Name="CategoryCode" ColumnName="CategoryCode" />
+                <ScalarProperty Name="CategoryCreationDate" ColumnName="CategoryCreationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WebConfiguration">
+            <EntityTypeMapping TypeName="ParentalControlDBModel.WebConfiguration">
+              <MappingFragment StoreEntitySet="WebConfiguration">
+                <ScalarProperty Name="WebConfigurationId" ColumnName="WebConfigurationId" />
+                <ScalarProperty Name="WebConfigurationAccess" ColumnName="WebConfigurationAccess" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="InfantAccountId" ColumnName="InfantAccountId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WindowsAccount">
+            <EntityTypeMapping TypeName="ParentalControlDBModel.WindowsAccount">
+              <MappingFragment StoreEntitySet="WindowsAccount">
+                <ScalarProperty Name="WindowsAccountId" ColumnName="WindowsAccountId" />
+                <ScalarProperty Name="WindowsAccountName" ColumnName="WindowsAccountName" />
+                <ScalarProperty Name="WindowsAccountCreationDate" ColumnName="WindowsAccountCreationDate" />
+                <ScalarProperty Name="DevicePCId" ColumnName="DevicePCId" />
+                <ScalarProperty Name="InfantAccountId" ColumnName="InfantAccountId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
