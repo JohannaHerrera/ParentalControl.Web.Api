@@ -16,5 +16,6 @@ namespace ParentalControl.Web.Api.Models.ReponseModels
         public List<InfantAccountModel> infantAccountList { get; set; }
         public List<ScheduleModel> scheduleList { get; set; }
         public string MessageError { get; set; }
+        public bool IsSuccess { get; set; }
     }
 }
