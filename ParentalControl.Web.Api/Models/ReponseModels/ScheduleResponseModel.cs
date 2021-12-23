@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ParentalControl.Web.Api.Models.EntityModels
+namespace ParentalControl.Web.Api.Models.ReponseModels
 {
-    public class ScheduleModel
+    public class ScheduleResponseModel
     {
         public int ScheduleId { get; set; }
-        public string ScheduleTime { get; set; }
-
-        /*public DateTime ScheduleStartTime { get; set; }
+        public DateTime ScheduleStartTime { get; set; }
         public DateTime ScheduleEndTime { get; set; }
         public DateTime ScheduleCreationDate { get; set; }
-	    public int ParentId { get; set; }*/
+        public int? ParentId { get; set; }
     }
 }

@@ -166,6 +166,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Data\Activity.cs">
       <DependentUpon>ParentalControlDB.tt</DependentUpon>
@@ -244,6 +245,7 @@
     <Compile Include="Models\ReponseModels\DevicePhoneResponseModel.cs" />
     <Compile Include="Models\ReponseModels\LoginResponseModel.cs" />
     <Compile Include="Models\ReponseModels\RegisterResponseModel.cs" />
+    <Compile Include="Models\ReponseModels\ScheduleResponseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
