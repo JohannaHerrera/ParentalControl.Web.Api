@@ -162,9 +162,11 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Constants\AppConstants.cs" />
     <Compile Include="Controllers\DevicePhoneController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
@@ -240,10 +242,13 @@
     <Compile Include="Models\EntityModels\GetDeviceInfoModel.cs" />
     <Compile Include="Models\EntityModels\InfantAccountModel.cs" />
     <Compile Include="Models\EntityModels\LoginModel.cs" />
+    <Compile Include="Models\EntityModels\NewsModel.cs" />
     <Compile Include="Models\EntityModels\RegisterModel.cs" />
     <Compile Include="Models\EntityModels\ScheduleModel.cs" />
+    <Compile Include="Models\EntityModels\UpdateDevicePhoneInfoModel.cs" />
     <Compile Include="Models\ReponseModels\DevicePhoneResponseModel.cs" />
     <Compile Include="Models\ReponseModels\LoginResponseModel.cs" />
+    <Compile Include="Models\ReponseModels\NewsResponseModel.cs" />
     <Compile Include="Models\ReponseModels\RegisterResponseModel.cs" />
     <Compile Include="Models\ReponseModels\ScheduleResponseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -319,6 +324,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Login\" />
+    <Folder Include="Views\News\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
