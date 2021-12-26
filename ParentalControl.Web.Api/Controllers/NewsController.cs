@@ -25,7 +25,7 @@ namespace ParentalControl.Web.Api.Controllers
                 using(var db = new ParentalControlDBEntities())
                 {
                     var newsInfo = (from ns in db.News
-                                    select ns).ToList();
+                                    select ns).ToList(); 
 
                     if(newsInfo.Count() > 0)
                     {

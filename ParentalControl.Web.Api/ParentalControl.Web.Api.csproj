@@ -163,8 +163,10 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Constants\AppConstants.cs" />
+    <Compile Include="Controllers\CreateInfantAccountController.cs" />
     <Compile Include="Controllers\DevicePhoneController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InfantAccountController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
@@ -236,17 +238,22 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\EntityModels\CreateInfantAccountModel.cs" />
     <Compile Include="Models\EntityModels\DevicePhoneModel.cs" />
     <Compile Include="Models\EntityModels\AppDeviceModel.cs" />
     <Compile Include="Models\EntityModels\DevicePhoneUseModel.cs" />
     <Compile Include="Models\EntityModels\GetDeviceInfoModel.cs" />
+    <Compile Include="Models\EntityModels\GetInfantAccountInfoModel.cs" />
     <Compile Include="Models\EntityModels\InfantAccountModel.cs" />
+    <Compile Include="Models\EntityModels\ListInfantAccountModel.cs" />
     <Compile Include="Models\EntityModels\LoginModel.cs" />
     <Compile Include="Models\EntityModels\NewsModel.cs" />
     <Compile Include="Models\EntityModels\RegisterModel.cs" />
     <Compile Include="Models\EntityModels\ScheduleModel.cs" />
     <Compile Include="Models\EntityModels\UpdateDevicePhoneInfoModel.cs" />
+    <Compile Include="Models\EntityModels\UpdateInfantAccountModel.cs" />
     <Compile Include="Models\ReponseModels\DevicePhoneResponseModel.cs" />
+    <Compile Include="Models\ReponseModels\InfantAccountResponseModel.cs" />
     <Compile Include="Models\ReponseModels\LoginResponseModel.cs" />
     <Compile Include="Models\ReponseModels\NewsResponseModel.cs" />
     <Compile Include="Models\ReponseModels\RegisterResponseModel.cs" />
@@ -323,6 +330,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\CreateInfantAccount\" />
+    <Folder Include="Views\DeleteInfantAccount\" />
+    <Folder Include="Views\EditInfantAccount\" />
+    <Folder Include="Views\InfantAccount\" />
     <Folder Include="Views\Login\" />
     <Folder Include="Views\News\" />
   </ItemGroup>
