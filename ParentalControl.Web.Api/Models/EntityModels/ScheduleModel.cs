@@ -9,5 +9,10 @@ namespace ParentalControl.Web.Api.Models.EntityModels
     {
         public int ScheduleId { get; set; }
         public string ScheduleTime { get; set; }
+
+        /*public DateTime ScheduleStartTime { get; set; }
+        public DateTime ScheduleEndTime { get; set; }
+        public DateTime ScheduleCreationDate { get; set; }
+	    public int ParentId { get; set; }*/
     }
 }
