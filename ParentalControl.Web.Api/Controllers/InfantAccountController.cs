@@ -82,7 +82,7 @@ namespace ParentalControl.Web.Api.Controllers
                     {
                         var infantAccountInfo = (from InfantAccount in db.InfantAccount
                                                  where InfantAccount.ParentId == getInfantAccountInfoModel.ParentId
-                                                 && InfantAccount.InfantName == getInfantAccountInfoModel.InfantName
+                                                 && InfantAccount.InfantAccountId == getInfantAccountInfoModel.InfantAccountId
                                                  select InfantAccount).FirstOrDefault();
 
                         if (infantAccountInfo != null)
@@ -108,7 +108,7 @@ namespace ParentalControl.Web.Api.Controllers
                         // DeleteInfantAccount
                         var infantAccountInfo = (from InfantAccount in db.InfantAccount
                                                  where InfantAccount.ParentId == getInfantAccountInfoModel.ParentId
-                                                 && InfantAccount.InfantName == getInfantAccountInfoModel.InfantName
+                                                 && InfantAccount.InfantAccountId == getInfantAccountInfoModel.InfantAccountId
                                                  select InfantAccount).FirstOrDefault();
 
                         if (infantAccountInfo != null)
