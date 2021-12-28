@@ -8,8 +8,8 @@ namespace ParentalControl.Web.Api.Models.ReponseModels
     public class ScheduleResponseModel
     {
         public int ScheduleId { get; set; }
-        public DateTime ScheduleStartTime { get; set; }
-        public DateTime ScheduleEndTime { get; set; }
+        public string ScheduleStartTime { get; set; }
+        public string ScheduleEndTime { get; set; }
         //public DateTime ScheduleCreationDate { get; set; }
         public int? ParentId { get; set; }
         public string MessageError { get; set; }
