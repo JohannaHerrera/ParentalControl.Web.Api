@@ -64,7 +64,7 @@ namespace ParentalControl.Web.Api.Controllers
                             }
 
                             //Creo los registros de tiempo de uso del dispositivo para ese usuario
-                            string[] dias = new string[7] { "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", "Domingo" };
+                            string[] dias = new string[7] { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo" };
                             foreach (var dia in dias)
                             {
                                 DeviceUse deviceUse = new DeviceUse();
