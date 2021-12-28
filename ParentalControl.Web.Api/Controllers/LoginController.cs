@@ -35,7 +35,6 @@ namespace ParentalControl.Web.Api.Controllers
                             loginResponseModel.ParentId = loginParent.ParentId;
                             loginResponseModel.ParentUsername = loginParent.ParentUsername;
                             loginResponseModel.ParentEmail = loginParent.ParentEmail;
-
                             // Verifico si ya está registrado el dispositivo
                             var devicePhone = (from device in db.DevicePhone
                                                where device.DevicePhoneCode == loginModel.deviceModel.DevicePhoneCode
