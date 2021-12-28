@@ -20,7 +20,7 @@ namespace ParentalControl.Web.Api.Controllers
         /// <param name="parentId"></param>
         /// <returns></returns>
         [HttpGet]
-        public InfantAccountResponseModel GetInfantAccount(string parentId)
+        public InfantAccountResponseModel GetInfantAccount([FromUri]string parentId)
         {
             InfantAccountResponseModel infantAccountResponseModel = new InfantAccountResponseModel();
             List<ListInfantAccountModel> infantAccountModelList = new List<ListInfantAccountModel>();
@@ -82,7 +82,7 @@ namespace ParentalControl.Web.Api.Controllers
                     {
                         var infantAccountInfo = (from InfantAccount in db.InfantAccount
                                                  where InfantAccount.ParentId == getInfantAccountInfoModel.ParentId
-                                                 && InfantAccount.InfantName == getInfantAccountInfoModel.InfantName
+                                                 && InfantAccount.InfantAccountId == getInfantAccountInfoModel.InfantAccountId
                                                  select InfantAccount).FirstOrDefault();
 
                         if (infantAccountInfo != null)
@@ -108,59 +108,41 @@ namespace ParentalControl.Web.Api.Controllers
                         // DeleteInfantAccount
                         var infantAccountInfo = (from InfantAccount in db.InfantAccount
                                                  where InfantAccount.ParentId == getInfantAccountInfoModel.ParentId
-                                                 && InfantAccount.InfantName == getInfantAccountInfoModel.InfantName
+                                                 && InfantAccount.InfantAccountId == getInfantAccountInfoModel.InfantAccountId
                                                  select InfantAccount).FirstOrDefault();
 
                         if (infantAccountInfo != null)
                         {
                             int infantAccountId = infantAccountInfo.InfantAccountId;
-                            var activity = db.Activity.Find(infantAccountId);
-                            if (activity != null)
+                            var activity = db.Activity.Where(x => x.InfantAccountId == infantAccountId);
+                            var apps = db.App.Where(x => x.InfantAccountId == infantAccountId);
+                            var devicePhone = db.DevicePhone.Where(x => x.InfantAccountId == infantAccountId).ToList();
+                            foreach (var i in devicePhone)
                             {
-                                db.Activity.Remove(activity);
+                                i.InfantAccountId = null;
+                                db.Entry(i).State = System.Data.Entity.EntityState.Modified;
                                 db.SaveChanges();
                             }
-                            var app = db.App.Find(infantAccountId);
-                            if (app != null)
+                            var deviceUse = db.DeviceUse.Where(x => x.InfantAccountId == infantAccountId);
+                            var request = db.Request.Where(x => x.InfantAccountId == infantAccountId);
+                            var webConfiguration = db.WebConfiguration.Where(x => x.InfantAccountId == infantAccountId);
+                            var windowsAccount = db.WindowsAccount.Where(x => x.InfantAccountId == infantAccountId).ToList();
+                            foreach (var i in windowsAccount)
                             {
-                                db.App.Remove(app);
-                                db.SaveChanges();
-                            }
-                            var devicePhone = db.DevicePhone.Find(infantAccountId);
-                            if (devicePhone != null)
-                            {
-                                devicePhone.InfantAccountId = null;
-                                db.Entry(devicePhone).State = System.Data.Entity.EntityState.Modified;
-                                db.SaveChanges();
-                            }
-                            var deviceUse = db.DeviceUse.Find(infantAccountId);
-                            if (deviceUse != null)
-                            {
-                                db.DeviceUse.Remove(deviceUse);
-                                db.SaveChanges();
-                            }
-                            var request = db.Request.Find(infantAccountId);
-                            if (request != null)
-                            {
-                                db.Request.Remove(request);
-                                db.SaveChanges();
-                            }
-                            var webConfiguration = db.WebConfiguration.Find(infantAccountId);
-                            if (webConfiguration != null)
-                            {
-                                db.WebConfiguration.Remove(webConfiguration);
-                                db.SaveChanges();
-                            }
-                            var windowsAccount = db.WindowsAccount.Find(infantAccountId);
-                            if (windowsAccount != null)
-                            {
-                                windowsAccount.InfantAccountId = null;
-                                db.Entry(windowsAccount).State = System.Data.Entity.EntityState.Modified;
+                                i.InfantAccountId = null;
+                                db.Entry(i).State = System.Data.Entity.EntityState.Modified;
                                 db.SaveChanges();
                             }
 
+                            //Valida que se borre la llave foranea
+                            db.Activity.RemoveRange(activity);
+                            db.App.RemoveRange(apps);
+                            db.DeviceUse.RemoveRange(deviceUse);
+                            db.Request.RemoveRange(request);
+                            db.WebConfiguration.RemoveRange(webConfiguration);
                             db.InfantAccount.Remove(infantAccountInfo);
                             db.SaveChanges();
+
                             infantAccountResponseModel.IsSuccess = true;
                             infantAccountResponseModel.InfantAccountModelList = infantAccountModelList;
                         }

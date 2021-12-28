@@ -24,7 +24,7 @@ namespace ParentalControl.Web.Api.Controllers
             try
             {
                 if (createInfantAccountModel.InfantName != null && createInfantAccountModel.InfantGender != null
-                        && createInfantAccountModel.ParentId != null)
+                        && createInfantAccountModel.ParentId != 0)
                 {
                     using (var db = new ParentalControlDBEntities())
                     {
@@ -40,14 +40,41 @@ namespace ParentalControl.Web.Api.Controllers
                         }
                         else
                         {
+                            var creationDate = DateTime.Now;
+
                             // Realizo el registro de la cuenta
                             InfantAccount infantAccount1 = new InfantAccount();
                             infantAccount1.InfantName = createInfantAccountModel.InfantName;
                             infantAccount1.InfantGender = createInfantAccountModel.InfantGender;
                             infantAccount1.ParentId = createInfantAccountModel.ParentId;
-                            infantAccount1.InfantCreationDate = DateTime.Now;
+                            infantAccount1.InfantCreationDate = creationDate;
                             db.InfantAccount.Add(infantAccount1);
                             db.SaveChanges();
+                            
+                            //Creo los registros de categorías para ese usuario
+                            List<WebCategory> webCategorieList = db.WebCategory.ToList();
+                            foreach (var category in webCategorieList)
+                            {
+                                WebConfiguration webConfiguration = new WebConfiguration();
+                                webConfiguration.WebConfigurationAccess = false;
+                                webConfiguration.CategoryId = category.CategoryId;
+                                webConfiguration.InfantAccountId = infantAccount1.InfantAccountId;
+                                db.WebConfiguration.Add(webConfiguration);
+                                db.SaveChanges();
+                            }
+
+                            //Creo los registros de tiempo de uso del dispositivo para ese usuario
+                            string[] dias = new string[7] { "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo" };
+                            foreach (var dia in dias)
+                            {
+                                DeviceUse deviceUse = new DeviceUse();
+                                deviceUse.DeviceUseDay = dia;
+                                deviceUse.DeviceUseCreationDate = creationDate;
+                                deviceUse.InfantAccountId = infantAccount1.InfantAccountId;
+                                deviceUse.ScheduleId = null;
+                                db.DeviceUse.Add(deviceUse);
+                                db.SaveChanges();
+                            }
 
                             infantAccountResponseModel.IsSuccess = true;
                         }
