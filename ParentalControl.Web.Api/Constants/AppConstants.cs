@@ -22,5 +22,29 @@ namespace ParentalControl.Web.Api.Constants
                 return true;
             }
         }
+
+        public int WebConfiguration
+        {
+            get
+            {
+                return 1;
+            }
+        }
+
+        public int AppConfiguration
+        {
+            get
+            {
+                return 2;
+            }
+        }
+
+        public int DeviceConfiguration
+        {
+            get
+            {
+                return 3;
+            }
+        }
     }
 }
