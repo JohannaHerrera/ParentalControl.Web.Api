@@ -175,6 +175,7 @@
     <Compile Include="Controllers\RequestController.cs" />
     <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Controllers\ScheduleDeleteController.cs" />
+    <Compile Include="Controllers\ScheduleEditFindController.cs" />
     <Compile Include="Controllers\ScheduleManageController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Data\Activity.cs">
@@ -257,6 +258,7 @@
     <Compile Include="Models\EntityModels\NewsModel.cs" />
     <Compile Include="Models\EntityModels\RegisterModel.cs" />
     <Compile Include="Models\EntityModels\RequestModel.cs" />
+    <Compile Include="Models\EntityModels\ScheduleEditFindModel.cs" />
     <Compile Include="Models\EntityModels\ScheduleModel.cs" />
     <Compile Include="Models\EntityModels\ScheduleRegisterModel.cs" />
     <Compile Include="Models\EntityModels\ScheduleUpdateModel.cs" />

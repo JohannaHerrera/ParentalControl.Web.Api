@@ -9,11 +9,12 @@ using ParentalControl.Web.Api.Data;
 using ParentalControl.Web.Api.Constants;
 using System.Data.Entity;
 
+
 namespace ParentalControl.Web.Api.Controllers
 {
     [AllowAnonymous]
     [RoutePrefix("api/ScheduleManage")]
-    public class ScheduleManageController
+    public class ScheduleManageController : ApiController
     {
         [HttpPost]
         public ScheduleResponseModel Post([FromBody] ScheduleRegisterModel scheduleRegisterModel)
@@ -21,49 +22,48 @@ namespace ParentalControl.Web.Api.Controllers
             ScheduleResponseModel scheduleResponseModel = new ScheduleResponseModel();
             try
             {
-                if (scheduleRegisterModel.Action == 1)
+
+                scheduleResponseModel.Registered = false;
+                //*********************** NECESITO LA VARIABLE DEL PADRE LOGUEADO ************************
+
+                if (scheduleRegisterModel.ParentId > 0
+                && scheduleRegisterModel.ScheduleStartTime != null
+                && scheduleRegisterModel.ScheduleEndTime != null)
                 {
-                    scheduleResponseModel.Registered = false;
-                    //*********************** NECESITO LA VARIABLE DEL PADRE LOGUEADO ************************
-
-                    if (scheduleRegisterModel.ParentId > 0
-                    && scheduleRegisterModel.ScheduleStartTime != null
-                    && scheduleRegisterModel.ScheduleEndTime != null)
+                    using (var db = new ParentalControlDBEntities())
                     {
-                        using (var db = new ParentalControlDBEntities())
+                        var scheduleVerification = (from scheduleV in db.Schedule
+                                                    where scheduleV.ScheduleStartTime == scheduleRegisterModel.ScheduleStartTime
+                                                    where scheduleV.ScheduleEndTime == scheduleRegisterModel.ScheduleEndTime
+                                                    where scheduleV.ParentId == scheduleRegisterModel.ParentId /*scheduleRegisterModel.ParentId*/
+                                                    select scheduleV).FirstOrDefault();
+
+                        if (scheduleVerification != null)
                         {
-                            var scheduleVerification = (from scheduleV in db.Schedule
-                                                        where scheduleV.ScheduleStartTime == scheduleRegisterModel.ScheduleStartTime
-                                                        where scheduleV.ScheduleEndTime == scheduleRegisterModel.ScheduleEndTime
-                                                        where scheduleV.ParentId == scheduleRegisterModel.ParentId /*scheduleRegisterModel.ParentId*/
-                                                        select scheduleV).FirstOrDefault();
+                            // Verifico si ya existe un horario 
+                            scheduleResponseModel.MessageError = "Error. Registro existente.";
+                        }
+                        else
+                        {
+                            // Realizo el registro del horario
+                            Schedule schedule = new Schedule();
+                            schedule.ParentId = scheduleRegisterModel.ParentId;
+                            schedule.ScheduleStartTime = scheduleRegisterModel.ScheduleStartTime;
+                            schedule.ScheduleEndTime = scheduleRegisterModel.ScheduleEndTime;
+                            schedule.ScheduleCreationDate = DateTime.Now;
 
-                            if (scheduleVerification != null)
-                            {
-                                // Verifico si ya existe un horario 
-                                scheduleResponseModel.MessageError = "Error. Ya existe una cuenta con el mismo correo.";
-                            }
-                            else
-                            {
-                                // Realizo el registro del horario
-                                Schedule schedule = new Schedule();
-                                schedule.ParentId = scheduleVerification.ParentId;
-                                schedule.ScheduleStartTime = scheduleRegisterModel.ScheduleStartTime;
-                                schedule.ScheduleEndTime = scheduleRegisterModel.ScheduleEndTime;
-                                schedule.ScheduleCreationDate = DateTime.Now;
+                            db.Schedule.Add(schedule);
+                            db.SaveChanges();
 
-                                db.Schedule.Add(schedule);
-                                db.SaveChanges();
-
-                                scheduleResponseModel.Registered = true;
-                            }
+                            scheduleResponseModel.Registered = true;
                         }
                     }
-                    else
-                    {
-                        scheduleResponseModel.MessageError = "Ingrese todos los datos requeridos.";
-                    }
                 }
+                else
+                {
+                    scheduleResponseModel.MessageError = "Ingrese todos los datos requeridos.";
+                }
+                
                 
             }
             catch (Exception ex)
@@ -88,7 +88,7 @@ namespace ParentalControl.Web.Api.Controllers
                     using (var db = new ParentalControlDBEntities())
                     {
                         var scheduleInfo = (from schedule in db.Schedule
-                                            where schedule.ParentId == scheduleUpdateModel.ParentId
+                                            where schedule.ScheduleId == scheduleUpdateModel.ScheduleId
                                             select schedule).FirstOrDefault();
 
                         if (scheduleInfo != null)

@@ -14,7 +14,7 @@ namespace ParentalControl.Web.Api.Controllers
 {
     [AllowAnonymous]
     [RoutePrefix("api/ScheduleDelete")]
-    public class ScheduleDeleteController
+    public class ScheduleDeleteController : ApiController
     {
         [HttpPost]
         public ScheduleResponseModel Post([FromBody] GetScheduleInfoModel scheduleInfoModel)
@@ -26,7 +26,7 @@ namespace ParentalControl.Web.Api.Controllers
                 using (var db = new ParentalControlDBEntities())
                 {
                     var schedule = (from scheduleInfo in db.Schedule
-                                    where scheduleInfo.ParentId == scheduleInfoModel.ParentId
+                                    where scheduleInfo.ScheduleId == scheduleInfoModel.ScheduleId
                                     select scheduleInfo).FirstOrDefault();
                     if (schedule != null)
                     {

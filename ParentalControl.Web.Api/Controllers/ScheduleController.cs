@@ -33,13 +33,24 @@ namespace ParentalControl.Web.Api.Controllers
                                             select schedule).ToList();
                     if (scheduleInfoList.Count > 0)
                     {
+                        int count = 0;
                         foreach (var item in scheduleInfoList)
                         {
-                            scheduleResponseModel.ScheduleId = item.ScheduleId;
-                            scheduleResponseModel.ScheduleStartTime = item.ScheduleStartTime;
-                            scheduleResponseModel.ScheduleEndTime = item.ScheduleEndTime;
-                            scheduleResponseModel.ParentId = item.ParentId;
-                            scheduleResponseModelList.Add(scheduleResponseModel);
+                            ScheduleResponseModel scheduleResponseModel2 = new ScheduleResponseModel();
+                            scheduleResponseModel2.ScheduleId = item.ScheduleId;
+                            //string start = item.ScheduleStartTime.ToString("HH:mm");
+                            //string end = item.ScheduleEndTime.ToString("HH:mm");
+                            //scheduleResponseModel.ScheduleStartTime = DateTime.ParseExact(start,"HH:mm", null);
+                            //scheduleResponseModel.ScheduleEndTime = DateTime.ParseExact(end, "HH:mm", null); ;
+                            scheduleResponseModel2.ScheduleStartTime = item.ScheduleStartTime.ToString("HH:mm");
+                            scheduleResponseModel2.ScheduleEndTime =item.ScheduleEndTime.ToString("HH:mm");
+                            scheduleResponseModel2.ParentId = item.ParentId;
+                            scheduleResponseModelList.Add(scheduleResponseModel2);
+                            count++;
+                            //scheduleResponseModel.ScheduleEndTime = null;
+                            //scheduleResponseModel.ScheduleStartTime = null;
+
+
                         }
                     }
                     else
