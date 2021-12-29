@@ -9,11 +9,12 @@ using ParentalControl.Web.Api.Data;
 using ParentalControl.Web.Api.Constants;
 using System.Data.Entity;
 
+
 namespace ParentalControl.Web.Api.Controllers
 {
     [AllowAnonymous]
     [RoutePrefix("api/ScheduleManage")]
-    public class ScheduleManageController
+    public class ScheduleManageController : ApiController
     {
         [HttpPost]
         public ScheduleResponseModel Post([FromBody] ScheduleRegisterModel scheduleRegisterModel)
@@ -46,7 +47,7 @@ namespace ParentalControl.Web.Api.Controllers
                         {
                             // Realizo el registro del horario
                             Schedule schedule = new Schedule();
-                            schedule.ParentId = scheduleVerification.ParentId;
+                            schedule.ParentId = scheduleRegisterModel.ParentId;
                             schedule.ScheduleStartTime = scheduleRegisterModel.ScheduleStartTime;
                             schedule.ScheduleEndTime = scheduleRegisterModel.ScheduleEndTime;
                             schedule.ScheduleCreationDate = DateTime.Now;

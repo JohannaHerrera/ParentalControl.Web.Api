@@ -34,8 +34,8 @@ namespace ParentalControl.Web.Api.Controllers
                     {
                         scheduleResponseModel.ScheduleId = scheduleInfoList.ScheduleId;
                         scheduleResponseModel.ParentId = scheduleInfoList.ParentId;
-                        scheduleResponseModel.ScheduleStartTime = scheduleInfoList.ScheduleStartTime.ToString();
-                        scheduleResponseModel.ScheduleEndTime = scheduleInfoList.ScheduleEndTime.ToString();
+                        scheduleResponseModel.ScheduleStartTime = scheduleInfoList.ScheduleStartTime.ToString("HH:mm");
+                        scheduleResponseModel.ScheduleEndTime = scheduleInfoList.ScheduleEndTime.ToString("HH:mm");
                     }
                     else
                     {
