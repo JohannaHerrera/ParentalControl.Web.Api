@@ -48,6 +48,7 @@ namespace ParentalControl.Web.Api.Controllers
                         }
 
                         activityRulesResponseModel.activityRulesModelList = activityRulesModelList;
+                        activityRulesResponseModel.IsSuccess = true;
                     }
                     else
                     {
@@ -63,50 +64,5 @@ namespace ParentalControl.Web.Api.Controllers
 
             return activityRulesResponseModel;
         }
-
-
-        ////Este va a ser para actualizar
-        //[HttpPut]
-        //public bool UpdateInfantAccount([FromBody] UpdateInfantAccountModel updateInfantAccountModel)
-        //{
-        //    bool result = false;
-
-        //    try
-        //    {
-        //        if (!string.IsNullOrEmpty(updateInfantAccountModel.InfantName) && !string.IsNullOrEmpty(updateInfantAccountModel.InfantGender)
-        //            && updateInfantAccountModel.ParentId > 0 && updateInfantAccountModel.InfantAccountId > 0)
-        //        {
-        //            using (var db = new ParentalControlDBEntities())
-        //            {
-        //                var infantAccount = (from InfantAccount in db.InfantAccount
-        //                                     where InfantAccount.InfantAccountId == updateInfantAccountModel.InfantAccountId
-        //                                     && InfantAccount.ParentId == updateInfantAccountModel.ParentId
-        //                                     select InfantAccount).FirstOrDefault();
-
-        //                if (infantAccount != null)
-        //                {
-        //                    InfantAccount infantAccount1 = infantAccount;
-        //                    infantAccount1.InfantName = updateInfantAccountModel.InfantName;
-        //                    infantAccount1.InfantGender = updateInfantAccountModel.InfantGender;
-        //                    db.Entry(infantAccount1).State = System.Data.Entity.EntityState.Modified;
-        //                    db.SaveChanges();
-
-        //                    return true;
-        //                }
-        //            }
-        //        }
-        //        else
-        //        {
-        //            result = false;
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        result = false;
-        //    }
-
-        //    return result;
-        //}
-
     }
 }

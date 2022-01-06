@@ -269,9 +269,12 @@
     <Compile Include="Models\EntityModels\ScheduleModel.cs" />
     <Compile Include="Models\EntityModels\ScheduleRegisterModel.cs" />
     <Compile Include="Models\EntityModels\ScheduleUpdateModel.cs" />
+    <Compile Include="Models\EntityModels\UpdateAppRulesModel.cs" />
     <Compile Include="Models\EntityModels\UpdateDevicePhoneInfoModel.cs" />
+    <Compile Include="Models\EntityModels\UpdateDeviceUseRulesModel.cs" />
     <Compile Include="Models\EntityModels\UpdateInfantAccountModel.cs" />
     <Compile Include="Models\EntityModels\UpdateRequestModel.cs" />
+    <Compile Include="Models\EntityModels\UpdateWebConfigurationRulesModel.cs" />
     <Compile Include="Models\EntityModels\WebConfigurationRulesModel.cs" />
     <Compile Include="Models\ReponseModels\ActivityRulesResponseModel.cs" />
     <Compile Include="Models\ReponseModels\AppRulesResponseModel.cs" />

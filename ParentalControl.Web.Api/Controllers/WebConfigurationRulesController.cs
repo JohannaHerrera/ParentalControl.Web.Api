@@ -41,6 +41,7 @@ namespace ParentalControl.Web.Api.Controllers
                         }
 
                         webConfigurationRulesResponseModel.webConfigurationRulesModelList = webConfigurationRulesModelList;
+                        webConfigurationRulesResponseModel.IsSuccess = true;
                     }
                     else
                     {
@@ -55,6 +56,49 @@ namespace ParentalControl.Web.Api.Controllers
             }
 
             return webConfigurationRulesResponseModel;
+        }
+
+        [HttpPut]
+        public bool UpdateWebConfigurationRules([FromBody] List<UpdateWebConfigurationRulesModel> updateWebConfigurationRulesModel)
+        {
+            bool result = false;
+
+            try
+            {
+                foreach (var webConfig in updateWebConfigurationRulesModel)
+                {
+                    if (webConfig.CategoryId > 0 && webConfig.InfantAccountId > 0)
+                    {
+                        using (var db = new ParentalControlDBEntities())
+                        {
+                            var webConfigurationList = (from WebConfiguration in db.WebConfiguration
+                                                        where WebConfiguration.CategoryId == webConfig.CategoryId
+                                                        && WebConfiguration.InfantAccountId == webConfig.InfantAccountId
+                                                        select WebConfiguration).FirstOrDefault();
+
+                            if (webConfigurationList != null)
+                            {
+                                // Actualizo el nombre del dispositivo
+                                webConfigurationList.WebConfigurationAccess = webConfig.WebConfigurationAccess;
+                                db.SaveChanges();
+
+                                result = true;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        result = false;
+                    }
+                }
+                
+            }
+            catch (Exception ex)
+            {
+                result = false;
+            }
+
+            return result;
         }
     }
 }

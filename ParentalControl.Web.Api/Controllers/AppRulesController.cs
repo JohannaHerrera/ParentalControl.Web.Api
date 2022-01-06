@@ -24,13 +24,13 @@ namespace ParentalControl.Web.Api.Controllers
                 int infantId = Convert.ToInt32(infantAccountId);
                 using (var db = new ParentalControlDBEntities())
                 {
-                    var webConfigurationList = (from App in db.App
-                                                where App.InfantAccountId == infantId
-                                                select App).ToList();
+                    var appRulesList = (from App in db.App
+                                        where App.InfantAccountId == infantId
+                                        select App).ToList();
 
-                    if (webConfigurationList.Count() > 0)
+                    if (appRulesList.Count() > 0)
                     {
-                        foreach (var item in webConfigurationList)
+                        foreach (var item in appRulesList)
                         {
                             AppRulesModel listAppRulesModel = new AppRulesModel();
                             listAppRulesModel.AppId = item.AppId;
@@ -43,6 +43,7 @@ namespace ParentalControl.Web.Api.Controllers
                         }
 
                         appRulesResponseModel.appRulesModelList = appRulesModelList;
+                        appRulesResponseModel.IsSuccess = true;
                     }
                     else
                     {
@@ -57,6 +58,60 @@ namespace ParentalControl.Web.Api.Controllers
             }
 
             return appRulesResponseModel;
+        }
+
+        [HttpPut]
+        public bool UpdateAppRules([FromBody] List<UpdateAppRulesModel> updateAppRulesModel)
+        {
+            bool result = false;
+
+            try
+            {
+                foreach(var app in updateAppRulesModel)
+                {
+                    if (app.DevicePhoneId > 0 && app.InfantAccountId > 0)
+                    {
+                        using (var db = new ParentalControlDBEntities())
+                        {
+                            var appList = (from App in db.App
+                                           where App.AppName == app.AppName
+                                           && App.InfantAccountId == app.InfantAccountId
+                                           && App.DevicePhoneId == app.DevicePhoneId
+                                           select App).FirstOrDefault();
+
+                            if (appList != null)
+                            {
+                                // Actualizo el nombre del dispositivo
+                                appList.AppAccessPermission = app.AppAccessPermission;
+                                db.SaveChanges();
+
+                                if (app.ScheduleId == 0)
+                                {
+                                    appList.ScheduleId = null;
+                                    db.SaveChanges();
+                                }
+                                else
+                                {
+                                    // Actualizo
+                                    appList.ScheduleId = app.ScheduleId;
+                                    db.SaveChanges();
+                                }
+                                result = true;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        result = false;
+                    }
+                }                
+            }
+            catch (Exception ex)
+            {
+                result = false;
+            }
+
+            return result;
         }
     }
 }

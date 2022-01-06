@@ -42,6 +42,7 @@ namespace ParentalControl.Web.Api.Controllers
                         }
 
                         deviceUseRulesResponseModel.deviceUseRulesModelList = deviceUseRulesModelList;
+                        deviceUseRulesResponseModel.IsSuccess = true;
                     }
                     else
                     {
@@ -56,6 +57,58 @@ namespace ParentalControl.Web.Api.Controllers
             }
 
             return deviceUseRulesResponseModel;
+        }
+
+        [HttpPut]
+        public bool UpdateDeviceUseRules([FromBody] List<UpdateDeviceUseRulesModel> updateDeviceUseRulesModel)
+        {
+            bool result = false;
+
+            try
+            {
+                foreach(var deviceUse in updateDeviceUseRulesModel)
+                {
+                    if (deviceUse.InfantAccountId > 0)
+                    {
+                        using (var db = new ParentalControlDBEntities())
+                        {
+                            var deviceUseList = (from DeviceUse in db.DeviceUse
+                                                 where DeviceUse.DeviceUseDay == deviceUse.DeviceUseDay
+                                                        && DeviceUse.InfantAccountId == deviceUse.InfantAccountId
+                                                 select DeviceUse).FirstOrDefault();
+
+                            if (deviceUseList != null)
+                            {
+                                if (deviceUse.ScheduleId == 0)
+                                {
+                                    deviceUseList.ScheduleId = null;
+                                    db.SaveChanges();
+                                }
+                                else
+                                {
+                                    // Actualizo
+                                    deviceUseList.ScheduleId = deviceUse.ScheduleId;
+                                    db.SaveChanges();
+                                }
+                                
+
+                                result = true;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        result = false;
+                    }
+                }
+               
+            }
+            catch (Exception ex)
+            {
+                result = false;
+            }
+
+            return result;
         }
 
     }
