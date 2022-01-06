@@ -17,6 +17,7 @@ namespace ParentalControl.Web.Api.Controllers
         public LoginResponseModel Post([FromBody] LoginModel loginModel)
         {
             LoginResponseModel loginResponseModel = new LoginResponseModel();
+            loginResponseModel.IsFirstTime = false;
 
             try
             {
@@ -139,6 +140,8 @@ namespace ParentalControl.Web.Api.Controllers
                                     devicePhoneUse.ScheduleId = null;
                                     db.DevicePhoneUse.Add(devicePhoneUse);
                                     db.SaveChanges();
+
+                                    loginResponseModel.IsFirstTime = true;
                                 }                               
                             }
                         }

@@ -11,5 +11,6 @@ namespace ParentalControl.Web.Api.Models.ReponseModels
         public string ParentUsername { get; set; }
         public string ParentEmail { get; set; }
         public string MessageError { get; set; }
+        public bool IsFirstTime { get; set; }
     }
 }

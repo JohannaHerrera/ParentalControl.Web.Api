@@ -15,10 +15,6 @@ namespace ParentalControl.Web.Api.Controllers
     [RoutePrefix("api/ScheduleEditFind")]
     public class ScheduleEditFindController : ApiController
     {
-        //SOLO nombre post
-        // otro controlador
-
-
         [HttpPost]
         public ScheduleResponseModel Post([FromBody] ScheduleEditFindModel getScheduleInfoModel)
         {

@@ -73,6 +73,7 @@ namespace ParentalControl.Web.Api.Controllers
 
             return scheduleResponseModel;
         }
+
         [HttpPut]
         public bool Put([FromBody] ScheduleUpdateModel scheduleUpdateModel)
         {
