@@ -13,19 +13,22 @@ namespace ParentalControl.Web.Api.Controllers
     [RoutePrefix("api/AppRules")]
     public class AppRulesController : ApiController
     {
-        [HttpGet]
-        public AppRulesResponseModel GetAppRules([FromUri] string infantAccountId)
+        [HttpPost]
+        public AppRulesResponseModel Post([FromBody] GetAppConfigurationModel getAppConfigurationModel)
         {
             AppRulesResponseModel appRulesResponseModel = new AppRulesResponseModel();
             List<AppRulesModel> appRulesModelList = new List<AppRulesModel>();
 
             try
             {
-                int infantId = Convert.ToInt32(infantAccountId);
                 using (var db = new ParentalControlDBEntities())
                 {
                     var appRulesList = (from App in db.App
-                                        where App.InfantAccountId == infantId
+                                        join Device in db.DevicePhone
+                                        on App.DevicePhoneId
+                                        equals Device.DevicePhoneId
+                                        where App.InfantAccountId == getAppConfigurationModel.InfantAccountId    
+                                        && Device.DevicePhoneCode.ToLower().Equals(getAppConfigurationModel.DevicePhoneCode.ToLower())
                                         select App).ToList();
 
                     if (appRulesList.Count() > 0)
@@ -63,6 +66,7 @@ namespace ParentalControl.Web.Api.Controllers
         [HttpPut]
         public bool UpdateAppRules([FromBody] List<UpdateAppRulesModel> updateAppRulesModel)
         {
+            AppConstants constants = new AppConstants();
             bool result = false;
 
             try
@@ -80,19 +84,16 @@ namespace ParentalControl.Web.Api.Controllers
                                            select App).FirstOrDefault();
 
                             if (appList != null)
-                            {
-                                // Actualizo el nombre del dispositivo
-                                appList.AppAccessPermission = app.AppAccessPermission;
-                                db.SaveChanges();
-
+                            {                              
                                 if (app.ScheduleId == 0)
                                 {
+                                    appList.AppAccessPermission = app.AppAccessPermission;
                                     appList.ScheduleId = null;
                                     db.SaveChanges();
                                 }
                                 else
                                 {
-                                    // Actualizo
+                                    appList.AppAccessPermission = constants.Access;
                                     appList.ScheduleId = app.ScheduleId;
                                     db.SaveChanges();
                                 }

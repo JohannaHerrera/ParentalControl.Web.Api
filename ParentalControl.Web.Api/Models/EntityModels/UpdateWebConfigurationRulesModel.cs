@@ -9,7 +9,7 @@ namespace ParentalControl.Web.Api.Models.EntityModels
     {
         public int WebConfigurationId { get; set; }
         public bool? WebConfigurationAccess { get; set; }
-        public int CategoryId { get; set; }
+        public string CategoryName { get; set; }
         public int InfantAccountId { get; set; }
     }
 }
