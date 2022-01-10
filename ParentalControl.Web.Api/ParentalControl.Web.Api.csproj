@@ -162,6 +162,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Business\SendEmail.cs" />
     <Compile Include="Constants\AppConstants.cs" />
     <Compile Include="Controllers\ActivityRulesController.cs" />
     <Compile Include="Controllers\AppRulesController.cs" />
@@ -169,6 +170,7 @@
     <Compile Include="Controllers\DevicePhoneController.cs" />
     <Compile Include="Controllers\DeviceUseRulesController.cs" />
     <Compile Include="Controllers\GetDeviceConfigurationController.cs" />
+    <Compile Include="Controllers\GetDeviceUseByDayController.cs" />
     <Compile Include="Controllers\GetRequestsResponseModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InfantAccountController.cs" />
@@ -260,6 +262,7 @@
     <Compile Include="Models\EntityModels\GetDeviceInfoModel.cs" />
     <Compile Include="Models\EntityModels\GetInfantAccountInfoModel.cs" />
     <Compile Include="Models\EntityModels\GetScheduleInfoModel.cs" />
+    <Compile Include="Models\EntityModels\GetTimeByDayModel.cs" />
     <Compile Include="Models\EntityModels\InfantAccountModel.cs" />
     <Compile Include="Models\EntityModels\ListInfantAccountModel.cs" />
     <Compile Include="Models\EntityModels\LoginModel.cs" />
@@ -271,6 +274,7 @@
     <Compile Include="Models\EntityModels\ScheduleModel.cs" />
     <Compile Include="Models\EntityModels\ScheduleRegisterModel.cs" />
     <Compile Include="Models\EntityModels\ScheduleUpdateModel.cs" />
+    <Compile Include="Models\EntityModels\SendRequestModel.cs" />
     <Compile Include="Models\EntityModels\UpdateAppRulesModel.cs" />
     <Compile Include="Models\EntityModels\UpdateDevicePhoneInfoModel.cs" />
     <Compile Include="Models\EntityModels\UpdateDeviceUseRulesModel.cs" />
@@ -281,6 +285,7 @@
     <Compile Include="Models\ReponseModels\ActivityRulesResponseModel.cs" />
     <Compile Include="Models\ReponseModels\AppRulesResponseModel.cs" />
     <Compile Include="Models\ReponseModels\DevicePhoneResponseModel.cs" />
+    <Compile Include="Models\ReponseModels\DeviceUseByDayResponseModel.cs" />
     <Compile Include="Models\ReponseModels\DeviceUseRulesResponseModel.cs" />
     <Compile Include="Models\ReponseModels\GetDeviceConfigurationResponseModel.cs" />
     <Compile Include="Models\ReponseModels\InfantAccountResponseModel.cs" />
@@ -289,6 +294,7 @@
     <Compile Include="Models\ReponseModels\NewsResponseModel.cs" />
     <Compile Include="Models\ReponseModels\RegisterResponseModel.cs" />
     <Compile Include="Models\ReponseModels\ScheduleResponseModel.cs" />
+    <Compile Include="Models\ReponseModels\SendRequestResponseModel.cs" />
     <Compile Include="Models\ReponseModels\WebConfigurationRulesResponseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -369,6 +375,7 @@
     <Folder Include="Views\DeviceUseRules\" />
     <Folder Include="Views\EditInfantAccount\" />
     <Folder Include="Views\GetDeviceConfiguration\" />
+    <Folder Include="Views\GetDeviceUseByDay\" />
     <Folder Include="Views\GetRequestsResponseModel\" />
     <Folder Include="Views\InfantAccount\" />
     <Folder Include="Views\Login\" />
