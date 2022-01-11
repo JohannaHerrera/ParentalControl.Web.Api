@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ParentalControl.Web.Api.Controllers
+namespace ParentalControl.Web.Api.Models.ReponseModels
 {
-    public class GetRequestsResponseModel
+    public class GetInfantRequestResponseModel
     {
-        public List<RequestModel> requestModelList { get; set; }
+        public List<InfantRequestModel> requestModelList { get; set; }
         public string MessageError { get; set; }
     }
 }

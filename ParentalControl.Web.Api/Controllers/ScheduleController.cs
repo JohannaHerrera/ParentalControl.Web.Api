@@ -39,11 +39,6 @@ namespace ParentalControl.Web.Api.Controllers
                             scheduleResponseModelList.Add(scheduleResponseModel2);
                         }
                     }
-                    else
-                    {
-                        scheduleResponseModel.MessageError = "No se encontró información de horarios.";
-                        scheduleResponseModelList.Add(scheduleResponseModel);
-                    }
                 }
             }
             catch (Exception ex)

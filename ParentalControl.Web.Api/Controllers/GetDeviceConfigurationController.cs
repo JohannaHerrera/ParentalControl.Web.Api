@@ -188,6 +188,9 @@ namespace ParentalControl.Web.Api.Controllers
                                     else
                                     {
                                         var request = (from requests in db.Request
+                                                       join device in db.DevicePhone
+                                                       on requests.DevicePhoneId 
+                                                       equals device.DevicePhoneId
                                                        where requests.InfantAccountId == sendRequestModel.InfantAccountId
                                                        && requests.RequestObject.ToLower().Equals(sendRequestModel.Object.ToLower())
                                                        && requests.RequestState == 0
@@ -210,6 +213,7 @@ namespace ParentalControl.Web.Api.Controllers
                                             requestModel.RequestState = 0;
                                             requestModel.RequestCreationDate = DateTime.Now;
                                             requestModel.ParentId = sendRequestModel.ParentId;
+                                            requestModel.DevicePhoneId = sendRequestModel.DevicePhoneId;
                                             db.Request.Add(requestModel);
                                             db.SaveChanges();
 
@@ -235,11 +239,18 @@ namespace ParentalControl.Web.Api.Controllers
                                     else
                                     {
                                         var request = (from requests in db.Request
+                                                       join device in db.DevicePhone
+                                                       on requests.DevicePhoneId
+                                                       equals device.DevicePhoneId
                                                        where requests.InfantAccountId == sendRequestModel.InfantAccountId
                                                        && requests.RequestObject.ToLower().Equals(sendRequestModel.Object.ToLower())
                                                        && requests.RequestState == 0
                                                        && requests.RequestTypeId == 2
                                                        select requests).FirstOrDefault();
+
+                                        var deviceInfo = (from device in db.DevicePhone
+                                                          where device.DevicePhoneId == sendRequestModel.DevicePhoneId
+                                                          select device).FirstOrDefault();
 
                                         if (request != null)
                                         {
@@ -257,12 +268,14 @@ namespace ParentalControl.Web.Api.Controllers
                                             requestModel.RequestState = 0;
                                             requestModel.RequestCreationDate = DateTime.Now;
                                             requestModel.ParentId = sendRequestModel.ParentId;
+                                            requestModel.DevicePhoneId = sendRequestModel.DevicePhoneId;
                                             db.Request.Add(requestModel);
                                             db.SaveChanges();
 
                                             string body = $"<p>¡Hola! <br> <br> Queremos informarte que <b>{infant.InfantName}</b> " +
                                                           $"está solicitando que le habilites la aplicación " +
-                                                          $"<b>{sendRequestModel.Object}</b>. <br>" +
+                                                          $"<b>{sendRequestModel.Object}</b> del dispositivo " +
+                                                          $"<b>{deviceInfo.DevicePhoneName}</b>. <br>" +
                                                           $"Para aprobar o desaprobar esta petición ingresa a nuestro " +
                                                           $"sistema y dirígete a la sección de <b>Notificaciones</b>.<p>";
 
@@ -281,12 +294,19 @@ namespace ParentalControl.Web.Api.Controllers
                                     else
                                     {
                                         var request = (from requests in db.Request
+                                                       join device in db.DevicePhone
+                                                       on requests.DevicePhoneId
+                                                       equals device.DevicePhoneId
                                                        where requests.InfantAccountId == sendRequestModel.InfantAccountId
                                                        && requests.RequestTime != null
                                                        && requests.RequestState == 0
                                                        && requests.RequestTypeId == 3
                                                        && DbFunctions.TruncateTime(requests.RequestCreationDate) == DbFunctions.TruncateTime(DateTime.Now)
                                                        select requests).FirstOrDefault();
+
+                                        var deviceInfo = (from device in db.DevicePhone
+                                                          where device.DevicePhoneId == sendRequestModel.DevicePhoneId
+                                                          select device).FirstOrDefault();
 
                                         if (request != null)
                                         {
@@ -335,6 +355,7 @@ namespace ParentalControl.Web.Api.Controllers
 
                                             string body = $"<p>¡Hola! <br> <br> Queremos informarte que <b>{infant.InfantName}</b> " +
                                                           $"está solicitando que le amplíes el tiempo de uso del dispositivo " +
+                                                          $"<b>{deviceInfo.DevicePhoneName}</b> " +
                                                           $"por: <b>{time}</b>. <br>" +
                                                           $"Para aprobar o desaprobar esta petición ingresa a nuestro " +
                                                           $"sistema y dirígete a la sección de <b>Notificaciones</b>.<p>";
@@ -348,6 +369,7 @@ namespace ParentalControl.Web.Api.Controllers
                                             requestModel.RequestState = 0;
                                             requestModel.RequestCreationDate = DateTime.Now;
                                             requestModel.ParentId = sendRequestModel.ParentId;
+                                            requestModel.DevicePhoneId = sendRequestModel.DevicePhoneId;
                                             db.Request.Add(requestModel);
                                             db.SaveChanges();
 

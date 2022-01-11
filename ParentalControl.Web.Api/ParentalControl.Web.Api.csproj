@@ -171,9 +171,9 @@
     <Compile Include="Controllers\DeviceUseRulesController.cs" />
     <Compile Include="Controllers\GetDeviceConfigurationController.cs" />
     <Compile Include="Controllers\GetDeviceUseByDayController.cs" />
-    <Compile Include="Controllers\GetRequestsResponseModel.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InfantAccountController.cs" />
+    <Compile Include="Controllers\InfantRequestController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\ParentController.cs" />
@@ -264,6 +264,7 @@
     <Compile Include="Models\EntityModels\GetScheduleInfoModel.cs" />
     <Compile Include="Models\EntityModels\GetTimeByDayModel.cs" />
     <Compile Include="Models\EntityModels\InfantAccountModel.cs" />
+    <Compile Include="Models\EntityModels\InfantRequestModel.cs" />
     <Compile Include="Models\EntityModels\ListInfantAccountModel.cs" />
     <Compile Include="Models\EntityModels\LoginModel.cs" />
     <Compile Include="Models\EntityModels\MyProfileModel.cs" />
@@ -288,6 +289,8 @@
     <Compile Include="Models\ReponseModels\DeviceUseByDayResponseModel.cs" />
     <Compile Include="Models\ReponseModels\DeviceUseRulesResponseModel.cs" />
     <Compile Include="Models\ReponseModels\GetDeviceConfigurationResponseModel.cs" />
+    <Compile Include="Models\ReponseModels\GetInfantRequestResponseModel.cs" />
+    <Compile Include="Models\ReponseModels\GetRequestsResponseModel.cs" />
     <Compile Include="Models\ReponseModels\InfantAccountResponseModel.cs" />
     <Compile Include="Models\ReponseModels\GetMyProfileResponseModel.cs" />
     <Compile Include="Models\ReponseModels\LoginResponseModel.cs" />
@@ -378,6 +381,7 @@
     <Folder Include="Views\GetDeviceUseByDay\" />
     <Folder Include="Views\GetRequestsResponseModel\" />
     <Folder Include="Views\InfantAccount\" />
+    <Folder Include="Views\InfantRequest\" />
     <Folder Include="Views\Login\" />
     <Folder Include="Views\News\" />
     <Folder Include="Views\Parent\" />
