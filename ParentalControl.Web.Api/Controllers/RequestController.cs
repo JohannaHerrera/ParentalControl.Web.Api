@@ -40,15 +40,26 @@ namespace ParentalControl.Web.Api.Controllers
                                                RequestState = request.RequestState,
                                                RequestTime = request.RequestTime,
                                                InfantGender = infant.InfantGender,
-                                               InfantName = infant.InfantName,
-                                               DevicePCId = request.DevicePCId,
-                                               DevicePhoneId = request.DevicePCId
+                                               InfantName = infant.InfantName
                                            }).ToList();
 
                         if (requestList != null && requestList.Count() > 0)
                         {
                             foreach (var request in requestList)
                             {
+                                var requestInfo = (from req in db.Request
+                                                   where req.RequestId == request.RequestId
+                                                   select req).FirstOrDefault();
+
+                                if(requestInfo.DevicePCId != null)
+                                {
+                                    request.DevicePCId = requestInfo.DevicePCId;
+                                }
+                                else if(requestInfo.DevicePhoneId != null)
+                                {
+                                    request.DevicePhoneId = requestInfo.DevicePhoneId;
+                                }
+
                                 if (request.RequestTypeId == constants.WebConfiguration)
                                 {
                                     request.RequestDescription = $"Petición para habilitar el acceso a la categoría" +
