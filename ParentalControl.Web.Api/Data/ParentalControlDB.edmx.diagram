@@ -15,7 +15,7 @@
         <EntityTypeShape EntityType="ParentalControlDBModel.InfantAccount" Width="1.5" PointX="3" PointY="19.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ParentalControlDBModel.News" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ParentalControlDBModel.Parent" Width="1.5" PointX="0.75" PointY="16" IsExpanded="true" />
-        <EntityTypeShape EntityType="ParentalControlDBModel.Request" Width="1.5" PointX="8.25" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ParentalControlDBModel.Request" Width="1.5" PointX="8.5" PointY="12" IsExpanded="true" />
         <EntityTypeShape EntityType="ParentalControlDBModel.RequestType" Width="1.5" PointX="6" PointY="9.375" IsExpanded="true" />
         <EntityTypeShape EntityType="ParentalControlDBModel.Schedule" Width="1.5" PointX="3" PointY="23.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ParentalControlDBModel.WebCategory" Width="1.5" PointX="6" PointY="27.25" IsExpanded="true" />
@@ -44,6 +44,8 @@
         <AssociationConnector Association="ParentalControlDBModel.Request_Parent_fk03" ManuallyRouted="false" />
         <AssociationConnector Association="ParentalControlDBModel.Request_RequestType_fk01" ManuallyRouted="false" />
         <AssociationConnector Association="ParentalControlDBModel.WebCategory_WebConfigurationFk" ManuallyRouted="false" />
+        <AssociationConnector Association="ParentalControlDBModel.Request_DevicePC_fk04" />
+        <AssociationConnector Association="ParentalControlDBModel.Request_DevicePhone_fk05" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

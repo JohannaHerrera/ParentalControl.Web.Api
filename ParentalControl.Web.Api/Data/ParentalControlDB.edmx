@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ParentalControlDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ParentalControlDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Activity">
           <Key>
             <PropertyRef Name="ActivityId" />
@@ -123,6 +123,8 @@
           <Property Name="RequestState" Type="int" Nullable="false" />
           <Property Name="RequestCreationDate" Type="datetime" Nullable="false" />
           <Property Name="ParentId" Type="int" Nullable="false" />
+          <Property Name="DevicePCId" Type="int" />
+          <Property Name="DevicePhoneId" Type="int" />
         </EntityType>
         <EntityType Name="RequestType">
           <Key>
@@ -389,6 +391,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="Request_DevicePC_fk04">
+          <End Role="DevicePC" Type="Self.DevicePC" Multiplicity="0..1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DevicePC">
+              <PropertyRef Name="DevicePCId" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="DevicePCId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Request_DevicePhone_fk05">
+          <End Role="DevicePhone" Type="Self.DevicePhone" Multiplicity="0..1" />
+          <End Role="Request" Type="Self.Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DevicePhone">
+              <PropertyRef Name="DevicePhoneId" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="DevicePhoneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="Request_InfantAccount_fk02">
           <End Role="InfantAccount" Type="Self.InfantAccount" Multiplicity="1" />
           <End Role="Request" Type="Self.Request" Multiplicity="*" />
@@ -538,6 +564,14 @@
             <End Role="Parent" EntitySet="Parent" />
             <End Role="DevicePhone" EntitySet="DevicePhone" />
           </AssociationSet>
+          <AssociationSet Name="Request_DevicePC_fk04" Association="Self.Request_DevicePC_fk04">
+            <End Role="DevicePC" EntitySet="DevicePC" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+          <AssociationSet Name="Request_DevicePhone_fk05" Association="Self.Request_DevicePhone_fk05">
+            <End Role="DevicePhone" EntitySet="DevicePhone" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
           <AssociationSet Name="Request_InfantAccount_fk02" Association="Self.Request_InfantAccount_fk02">
             <End Role="InfantAccount" EntitySet="InfantAccount" />
             <End Role="Request" EntitySet="Request" />
@@ -559,8 +593,7 @@
             <End Role="WebConfiguration" EntitySet="WebConfiguration" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ParentalControlDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -619,6 +652,7 @@
           <NavigationProperty Name="AppDevice" Relationship="Self.AppDevice_DevicePC_fk01" FromRole="DevicePC" ToRole="AppDevice" />
           <NavigationProperty Name="Parent" Relationship="Self.fk_DevicePC_Parent" FromRole="DevicePC" ToRole="Parent" />
           <NavigationProperty Name="WindowsAccount" Relationship="Self.fk_WindowsAccount_DevicePC" FromRole="DevicePC" ToRole="WindowsAccount" />
+          <NavigationProperty Name="Request" Relationship="ParentalControlDBModel.Request_DevicePC_fk04" FromRole="DevicePC" ToRole="Request" />
         </EntityType>
         <EntityType Name="DevicePhone">
           <Key>
@@ -635,6 +669,7 @@
           <NavigationProperty Name="DevicePhoneUse" Relationship="Self.DevicePhone_DevicePhoneUseFk" FromRole="DevicePhone" ToRole="DevicePhoneUse" />
           <NavigationProperty Name="InfantAccount" Relationship="Self.InfantAccount_DevicePhoneFk" FromRole="DevicePhone" ToRole="InfantAccount" />
           <NavigationProperty Name="Parent" Relationship="Self.Parent_DevicePhoneFk" FromRole="DevicePhone" ToRole="Parent" />
+          <NavigationProperty Name="Request" Relationship="ParentalControlDBModel.Request_DevicePhone_fk05" FromRole="DevicePhone" ToRole="Request" />
         </EntityType>
         <EntityType Name="DevicePhoneUse">
           <Key>
@@ -718,6 +753,10 @@
           <NavigationProperty Name="InfantAccount" Relationship="Self.Request_InfantAccount_fk02" FromRole="Request" ToRole="InfantAccount" />
           <NavigationProperty Name="Parent" Relationship="Self.Request_Parent_fk03" FromRole="Request" ToRole="Parent" />
           <NavigationProperty Name="RequestType" Relationship="Self.Request_RequestType_fk01" FromRole="Request" ToRole="RequestType" />
+          <Property Name="DevicePCId" Type="Int32" />
+          <Property Name="DevicePhoneId" Type="Int32" />
+          <NavigationProperty Name="DevicePC" Relationship="ParentalControlDBModel.Request_DevicePC_fk04" FromRole="Request" ToRole="DevicePC" />
+          <NavigationProperty Name="DevicePhone" Relationship="ParentalControlDBModel.Request_DevicePhone_fk05" FromRole="Request" ToRole="DevicePhone" />
         </EntityType>
         <EntityType Name="RequestType">
           <Key>
@@ -1163,7 +1202,39 @@
             <End Role="WebCategory" EntitySet="WebCategory" />
             <End Role="WebConfiguration" EntitySet="WebConfiguration" />
           </AssociationSet>
+          <AssociationSet Name="Request_DevicePC_fk04" Association="ParentalControlDBModel.Request_DevicePC_fk04">
+            <End Role="DevicePC" EntitySet="DevicePC" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
+          <AssociationSet Name="Request_DevicePhone_fk05" Association="ParentalControlDBModel.Request_DevicePhone_fk05">
+            <End Role="DevicePhone" EntitySet="DevicePhone" />
+            <End Role="Request" EntitySet="Request" />
+          </AssociationSet>
         </EntityContainer>
+        <Association Name="Request_DevicePC_fk04">
+          <End Type="ParentalControlDBModel.DevicePC" Role="DevicePC" Multiplicity="0..1" />
+          <End Type="ParentalControlDBModel.Request" Role="Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DevicePC">
+              <PropertyRef Name="DevicePCId" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="DevicePCId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Request_DevicePhone_fk05">
+          <End Type="ParentalControlDBModel.DevicePhone" Role="DevicePhone" Multiplicity="0..1" />
+          <End Type="ParentalControlDBModel.Request" Role="Request" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DevicePhone">
+              <PropertyRef Name="DevicePhoneId" />
+            </Principal>
+            <Dependent Role="Request">
+              <PropertyRef Name="DevicePhoneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1289,6 +1360,8 @@
           <EntitySetMapping Name="Request">
             <EntityTypeMapping TypeName="ParentalControlDBModel.Request">
               <MappingFragment StoreEntitySet="Request">
+                <ScalarProperty Name="DevicePhoneId" ColumnName="DevicePhoneId" />
+                <ScalarProperty Name="DevicePCId" ColumnName="DevicePCId" />
                 <ScalarProperty Name="RequestId" ColumnName="RequestId" />
                 <ScalarProperty Name="RequestTypeId" ColumnName="RequestTypeId" />
                 <ScalarProperty Name="InfantAccountId" ColumnName="InfantAccountId" />

@@ -47,6 +47,19 @@ namespace ParentalControl.Web.Api.Controllers
                         {
                             foreach (var request in requestList)
                             {
+                                var requestInfo = (from req in db.Request
+                                                   where req.RequestId == request.RequestId
+                                                   select req).FirstOrDefault();
+
+                                if(requestInfo.DevicePCId != null)
+                                {
+                                    request.DevicePCId = requestInfo.DevicePCId;
+                                }
+                                else if(requestInfo.DevicePhoneId != null)
+                                {
+                                    request.DevicePhoneId = requestInfo.DevicePhoneId;
+                                }
+
                                 if (request.RequestTypeId == constants.WebConfiguration)
                                 {
                                     request.RequestDescription = $"Petición para habilitar el acceso a la categoría" +
@@ -54,11 +67,38 @@ namespace ParentalControl.Web.Api.Controllers
                                 }
                                 else if (request.RequestTypeId == constants.AppConfiguration)
                                 {
-                                    request.RequestDescription = $"Petición para habilitar el acceso a la aplicación:" +
-                                                                  $" {request.RequestObject}.";
+                                    if (request.DevicePhoneId != null)
+                                    {
+                                        var deviceInfo = (from device in db.DevicePhone
+                                                          where device.DevicePhoneId == request.DevicePhoneId
+                                                          select device).FirstOrDefault();
+                                        request.RequestDescription = $"Petición para habilitar el acceso a la aplicación:" +
+                                                                  $" {request.RequestObject} del dispositivo {deviceInfo.DevicePhoneName}.";
+                                    }
+                                    else if (request.DevicePCId != null)
+                                    {
+                                        var deviceInfo = (from device in db.DevicePC
+                                                          where device.DevicePCId == request.DevicePCId
+                                                          select device).FirstOrDefault();
+                                        request.RequestDescription = $"Petición para habilitar el acceso a la aplicación:" +
+                                                                  $" {request.RequestObject} del dispositivo {deviceInfo.DevicePCName}.";
+                                    }   
                                 }
                                 else if (request.RequestTypeId == constants.DeviceConfiguration)
                                 {
+                                    string nombre = string.Empty;
+                                    
+                                    if(request.DevicePCId != null)
+                                    {
+                                        nombre = "PC";
+                                    }
+                                    else if (request.DevicePhoneId != null)
+                                    {
+                                        nombre = (from device in db.DevicePhone
+                                                  where device.DevicePhoneId == request.DevicePhoneId
+                                                  select device).FirstOrDefault().DevicePhoneName;
+                                    }
+
                                     string[] time = request.RequestTime.ToString().Split('.');
                                     int numEntero = 0;
                                     int numDecimal = 0;
@@ -80,13 +120,14 @@ namespace ParentalControl.Web.Api.Controllers
                                             if (numDecimal > 0)
                                             {
                                                 request.RequestDescription = $"Petición para extender el tiempo de uso del " +
-                                                                              $"dispositivo por {numEntero} hora y {numDecimal}" +
+                                                                              $"dispositivo {nombre} " +
+                                                                              $"por {numEntero} hora y {numDecimal}" +
                                                                               $" minutos.";
                                             }
                                             else
                                             {
                                                 request.RequestDescription = $"Petición para extender el tiempo de uso del " +
-                                                                              $"dispositivo por {numEntero} hora.";
+                                                                              $"dispositivo {nombre} por {numEntero} hora.";
                                             }
                                         }
                                         else
@@ -94,20 +135,21 @@ namespace ParentalControl.Web.Api.Controllers
                                             if (numDecimal > 0)
                                             {
                                                 request.RequestDescription = $"Petición para extender el tiempo de uso del " +
-                                                                              $"dispositivo por {numEntero} horas y {numDecimal}" +
+                                                                              $"dispositivo {nombre} por {numEntero} " +
+                                                                              $"horas y {numDecimal}" +
                                                                               $" minutos.";
                                             }
                                             else
                                             {
                                                 request.RequestDescription = $"Petición para extender el tiempo de uso del " +
-                                                                              $"dispositivo por {numEntero} horas.";
+                                                                              $"dispositivo {nombre} por {numEntero} horas.";
                                             }
                                         }
                                     }
                                     else
                                     {
                                         request.RequestDescription = $"Petición para extender el tiempo de uso del " +
-                                                                      $"dispositivo por {numDecimal} minutos.";
+                                                                      $"dispositivo {nombre} por {numDecimal} minutos.";
                                     }
                                 }
                             }

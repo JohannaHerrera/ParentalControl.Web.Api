@@ -16,5 +16,7 @@ namespace ParentalControl.Web.Api.Models.EntityModels
         public string InfantName { get; set; }
         public string InfantGender { get; set; }
         public string RequestDescription { get; set; }
+        public int? DevicePhoneId { get; set; }
+        public int? DevicePCId { get; set; }
     }
 }

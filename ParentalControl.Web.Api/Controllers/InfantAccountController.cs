@@ -49,11 +49,6 @@ namespace ParentalControl.Web.Api.Controllers
 
                         infantAccountResponseModel.InfantAccountModelList = infantAccountModelList;
                     }
-                    else
-                    {
-                        infantAccountResponseModel.MessageError = "No se obtuvo información sobre los infantes.";
-                    }
-
                 }
             }
             catch (Exception ex)

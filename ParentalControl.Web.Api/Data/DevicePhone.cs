@@ -20,6 +20,7 @@ namespace ParentalControl.Web.Api.Data
             this.App = new HashSet<App>();
             this.AppDevice = new HashSet<AppDevice>();
             this.DevicePhoneUse = new HashSet<DevicePhoneUse>();
+            this.Request = new HashSet<Request>();
         }
     
         public int DevicePhoneId { get; set; }
@@ -37,5 +38,7 @@ namespace ParentalControl.Web.Api.Data
         public virtual ICollection<DevicePhoneUse> DevicePhoneUse { get; set; }
         public virtual InfantAccount InfantAccount { get; set; }
         public virtual Parent Parent { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Request> Request { get; set; }
     }
 }

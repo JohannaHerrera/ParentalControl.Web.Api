@@ -22,9 +22,13 @@ namespace ParentalControl.Web.Api.Data
         public int RequestState { get; set; }
         public System.DateTime RequestCreationDate { get; set; }
         public int ParentId { get; set; }
+        public Nullable<int> DevicePCId { get; set; }
+        public Nullable<int> DevicePhoneId { get; set; }
     
         public virtual InfantAccount InfantAccount { get; set; }
         public virtual Parent Parent { get; set; }
         public virtual RequestType RequestType { get; set; }
+        public virtual DevicePC DevicePC { get; set; }
+        public virtual DevicePhone DevicePhone { get; set; }
     }
 }

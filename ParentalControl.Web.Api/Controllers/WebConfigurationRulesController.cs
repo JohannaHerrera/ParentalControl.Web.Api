@@ -25,8 +25,8 @@ namespace ParentalControl.Web.Api.Controllers
                 using (var db = new ParentalControlDBEntities())
                 {
                     var webConfigurationList = (from WebConfiguration in db.WebConfiguration
-                                        where WebConfiguration.InfantAccountId == infantId
-                                        select WebConfiguration).ToList();
+                                                where WebConfiguration.InfantAccountId == infantId
+                                                select WebConfiguration).ToList();
 
                     if (webConfigurationList.Count() > 0)
                     {
@@ -34,9 +34,27 @@ namespace ParentalControl.Web.Api.Controllers
                         {
                             WebConfigurationRulesModel listWebConfigurationRulesModel = new WebConfigurationRulesModel();
                             listWebConfigurationRulesModel.WebConfigurationId = item.WebConfigurationId;
-                            listWebConfigurationRulesModel.WebConfigurationAccess = item.WebConfigurationAccess;
                             listWebConfigurationRulesModel.CategoryId = item.CategoryId;
+                            listWebConfigurationRulesModel.WebConfigurationAccess = item.WebConfigurationAccess;                            
                             listWebConfigurationRulesModel.InfantAccountId = item.InfantAccountId;
+
+                            if(item.CategoryId == 1)
+                            {
+                                listWebConfigurationRulesModel.CategoryName = "Drogas";
+                            }
+                            else if(item.CategoryId == 2)
+                            {
+                                listWebConfigurationRulesModel.CategoryName = "Pornografía";
+                            }
+                            else if(item.CategoryId == 3)
+                            {
+                                listWebConfigurationRulesModel.CategoryName = "Videojuegos";
+                            }
+                            else
+                            {
+                                listWebConfigurationRulesModel.CategoryName = "Violencia";
+                            }
+
                             webConfigurationRulesModelList.Add(listWebConfigurationRulesModel);
                         }
 
@@ -67,12 +85,15 @@ namespace ParentalControl.Web.Api.Controllers
             {
                 foreach (var webConfig in updateWebConfigurationRulesModel)
                 {
-                    if (webConfig.CategoryId > 0 && webConfig.InfantAccountId > 0)
+                    if (webConfig.InfantAccountId > 0)
                     {
                         using (var db = new ParentalControlDBEntities())
                         {
                             var webConfigurationList = (from WebConfiguration in db.WebConfiguration
-                                                        where WebConfiguration.CategoryId == webConfig.CategoryId
+                                                        join WebCateogires in db.WebCategory
+                                                        on WebConfiguration.CategoryId
+                                                        equals WebCateogires.CategoryId
+                                                        where WebCateogires.CategoryName == webConfig.CategoryName
                                                         && WebConfiguration.InfantAccountId == webConfig.InfantAccountId
                                                         select WebConfiguration).FirstOrDefault();
 
