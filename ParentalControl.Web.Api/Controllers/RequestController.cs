@@ -174,6 +174,7 @@ namespace ParentalControl.Web.Api.Controllers
         [HttpPut]
         public bool Put([FromBody] UpdateRequestModel updateRequestModel)
         {
+            AppConstants appConstants = new AppConstants();
             bool result = false;
 
             try
@@ -188,6 +189,37 @@ namespace ParentalControl.Web.Api.Controllers
 
                         if(requestUpdate != null)
                         {
+                            if (requestUpdate.RequestTypeId == 1)
+                            {
+                                var web = (from webConf in db.WebConfiguration
+                                           join category in db.WebCategory
+                                           on webConf.CategoryId
+                                           equals category.CategoryId
+                                           where webConf.InfantAccountId == requestUpdate.InfantAccountId
+                                           && category.CategoryName.ToUpper().Equals(requestUpdate.RequestObject.ToUpper())
+                                           select webConf).FirstOrDefault();
+
+                                if(web != null)
+                                {
+                                    web.WebConfigurationAccess = appConstants.Access;
+                                    db.SaveChanges();
+                                } 
+                            }
+                            else if(requestUpdate.RequestTypeId == 2)
+                            {
+                                var app = (from appConfig in db.App
+                                           where appConfig.AppName.ToUpper().Equals(requestUpdate.RequestObject.ToUpper())
+                                           && appConfig.InfantAccountId == requestUpdate.InfantAccountId
+                                           select appConfig).FirstOrDefault();
+
+                                if (app != null)
+                                {
+                                    app.AppAccessPermission = appConstants.Access;
+                                    app.ScheduleId = null;
+                                    db.SaveChanges();
+                                }
+                            }
+
                             requestUpdate.RequestState = updateRequestModel.RequestAction;
                             db.SaveChanges();
                             result = true;
