@@ -184,6 +184,7 @@
     <Compile Include="Controllers\ScheduleEditFindController.cs" />
     <Compile Include="Controllers\ScheduleManageController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\WebConfigurationController.cs" />
     <Compile Include="Controllers\WebConfigurationRulesController.cs" />
     <Compile Include="Data\Activity.cs">
       <DependentUpon>ParentalControlDB.tt</DependentUpon>
@@ -282,6 +283,7 @@
     <Compile Include="Models\EntityModels\UpdateInfantAccountModel.cs" />
     <Compile Include="Models\EntityModels\UpdateRequestModel.cs" />
     <Compile Include="Models\EntityModels\UpdateWebConfigurationRulesModel.cs" />
+    <Compile Include="Models\EntityModels\WebConfigurationModel.cs" />
     <Compile Include="Models\EntityModels\WebConfigurationRulesModel.cs" />
     <Compile Include="Models\ReponseModels\ActivityRulesResponseModel.cs" />
     <Compile Include="Models\ReponseModels\AppRulesResponseModel.cs" />
@@ -297,6 +299,7 @@
     <Compile Include="Models\ReponseModels\NewsResponseModel.cs" />
     <Compile Include="Models\ReponseModels\RegisterResponseModel.cs" />
     <Compile Include="Models\ReponseModels\ScheduleResponseModel.cs" />
+    <Compile Include="Models\ReponseModels\WebConfigurationResponseModel.cs" />
     <Compile Include="Models\ReponseModels\SendRequestResponseModel.cs" />
     <Compile Include="Models\ReponseModels\WebConfigurationRulesResponseModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -318,6 +321,11 @@
       <LastGenOutput>ParentalControlDB.cs</LastGenOutput>
     </Content>
     <Content Include="favicon.ico" />
+    <EmbeddedResource Include="FilesTxt\adult.txt" />
+    <EmbeddedResource Include="FilesTxt\drugs.txt" />
+    <EmbeddedResource Include="FilesTxt\games.txt" />
+    <EmbeddedResource Include="FilesTxt\socialN.txt" />
+    <EmbeddedResource Include="FilesTxt\violence.txt" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
