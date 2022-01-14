@@ -29,11 +29,13 @@ namespace ParentalControl.Web.Api.Controllers
             char delimit =';';
             string[] valores = information.Split(delimit);
             string url = valores[0];
+            string accesoWeb = url;
             string phoneCode = valores[1];
             drugsFlag = true;
             adultFlag = true;
             gameFlag = true;
             violenceFlag = true;
+            
             WebConfigurationResponseModel webConfigurationResponseModel = new WebConfigurationResponseModel();
             try
             {
@@ -45,7 +47,7 @@ namespace ParentalControl.Web.Api.Controllers
                         var deviceInfo = (from device in db.DevicePhone
                                           where device.DevicePhoneCode == phoneCode
                                           select device).FirstOrDefault();
-                        if (deviceInfo.DevicePhoneId > 0)
+                        if (deviceInfo.DevicePhoneId!=null)
                         {
 
                             //Valida si ya se asigno un infante al dispositivo
@@ -62,31 +64,35 @@ namespace ParentalControl.Web.Api.Controllers
                                 //Valido si existe una configuracion web para este infante
                                 if (webConfigInfoList.Count() > 0)
                                 {
-                                    //Listas de bloqueos
-                                    /*
-                                    List<string> listDrugs = new List<string>();
-                                    listDrugs.Add("drogas");
-                                    listDrugs.Add("cocaina");
-                                    listDrugs.Add("www.drogas.com");
-                                    List<string> listAdult = new List<string>();
-                                    listAdult.Add("erotismo");
-                                    listAdult.Add("+18");
-                                    listAdult.Add("sexo");
-                                    List<string> listGames = new List<string>();
-                                    listGames.Add("minijuegos");
-                                    listGames.Add("facebook");
-                                    listGames.Add("www.steam.com");
-                                    List<string> listViolence = new List<string>();
-                                    listViolence.Add("violencia");
-                                    listViolence.Add("gore");
-                                    listViolence.Add("www.youtube.com");*/
+
                                     var assembly = IntrospectionExtensions.GetTypeInfo(typeof(WebConfigurationController)).Assembly;
                                     Stream stream = assembly.GetManifestResourceStream("ParentalControl.Web.Api.FilesTxt.drugs.txt");
                                     string drugsRead;
                                     List<string> listDrugs = new List<string>();
                                     using (var reader = new System.IO.StreamReader(stream))
                                     {
+
                                         bool state = false;
+                                        //Asigno busqueda al historial
+                                        Activity activity = new Activity();
+                                        try
+                                        {
+                                            if (!accesoWeb.Contains("https://www.google.com/"))
+                                            {
+                                                activity.InfantAccountId = infantInfo.InfantAccountId;
+                                                activity.ActivityObject = "Búsqueda Web";
+                                                activity.ActivityDescription = "El infante ingresó a: " + accesoWeb;
+                                                activity.ActivityCreationDate = DateTime.Now;
+                                                activity.ActivityTimesAccess = 1;
+                                                db.Activity.Add(activity);
+                                                db.SaveChanges();
+                                            }
+                                            
+                                        }
+                                        catch (Exception ex)
+                                        {
+
+                                        }
                                         do
                                         {
                                             if ((drugsRead = reader.ReadLine()) != null)
