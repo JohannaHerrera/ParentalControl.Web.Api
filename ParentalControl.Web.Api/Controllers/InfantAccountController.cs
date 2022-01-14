@@ -169,21 +169,31 @@ namespace ParentalControl.Web.Api.Controllers
                 {
                     using (var db = new ParentalControlDBEntities())
                     {
+                        var encuentraNomreDuplicado = (from InfantAccount in db.InfantAccount
+                                                where InfantAccount.InfantName.ToLower() == updateInfantAccountModel.InfantName.ToLower()
+                                                && InfantAccount.ParentId == updateInfantAccountModel.ParentId
+                                                select InfantAccount).FirstOrDefault();
                         var infantAccount = (from InfantAccount in db.InfantAccount
                                           where InfantAccount.InfantAccountId == updateInfantAccountModel.InfantAccountId
                                           && InfantAccount.ParentId == updateInfantAccountModel.ParentId
                                           select InfantAccount).FirstOrDefault();
-
-                        if (infantAccount != null)
+                        if(encuentraNomreDuplicado != null)
                         {
-                            InfantAccount infantAccount1 = infantAccount;
-                            infantAccount1.InfantName = updateInfantAccountModel.InfantName;
-                            infantAccount1.InfantGender = updateInfantAccountModel.InfantGender;
-                            db.Entry(infantAccount1).State = System.Data.Entity.EntityState.Modified;
-                            db.SaveChanges();
-
-                            return true;
+                            result = false;
                         }
+                        else
+                        {
+                            if (infantAccount != null)
+                            {
+                                InfantAccount infantAccount1 = infantAccount;
+                                infantAccount1.InfantName = updateInfantAccountModel.InfantName;
+                                infantAccount1.InfantGender = updateInfantAccountModel.InfantGender;
+                                db.Entry(infantAccount1).State = System.Data.Entity.EntityState.Modified;
+                                db.SaveChanges();
+
+                                return true;
+                            }
+                        }                        
                     }
                 }
                 else
