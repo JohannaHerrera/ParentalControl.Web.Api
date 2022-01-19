@@ -123,10 +123,12 @@ namespace ParentalControl.Web.Api.Controllers
                             var deviceUseSchedules = db.DevicePhoneUse.Where(x => x.DevicePhoneId == devicePhone.DevicePhoneId);
                             var apps = db.App.Where(x => x.DevicePhoneId == devicePhone.DevicePhoneId);
                             var appsDevice = db.AppDevice.Where(x => x.DevicePhoneId == devicePhone.DevicePhoneId);
+                            var requests = db.Request.Where(x => x.DevicePhoneId == devicePhone.DevicePhoneId);
 
                             db.DevicePhoneUse.RemoveRange(deviceUseSchedules);
                             db.App.RemoveRange(apps);
                             db.AppDevice.RemoveRange(appsDevice);
+                            db.Request.RemoveRange(requests);
                             db.DevicePhone.Remove(devicePhone);
                             db.SaveChanges();
                             devicePhoneResponseModel.IsSuccess = true;

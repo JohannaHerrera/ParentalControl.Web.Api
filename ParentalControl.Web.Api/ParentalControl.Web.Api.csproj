@@ -356,6 +356,7 @@
     <Content Include="Data\ParentalControlDB.edmx.diagram">
       <DependentUpon>ParentalControlDB.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\FTPProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
