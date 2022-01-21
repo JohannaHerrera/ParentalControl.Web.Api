@@ -47,7 +47,8 @@ namespace ParentalControl.Web.Api.Controllers
                         var deviceInfo = (from device in db.DevicePhone
                                           where device.DevicePhoneCode == phoneCode
                                           select device).FirstOrDefault();
-                        if (deviceInfo.DevicePhoneId!=null)
+
+                        if (deviceInfo!=null)
                         {
 
                             //Valida si ya se asigno un infante al dispositivo
@@ -179,7 +180,7 @@ namespace ParentalControl.Web.Api.Controllers
 
                                     foreach (var webInfo in webConfigInfoList)
                                     {
-                                        if (webInfo.WebConfigurationAccess == true && webInfo.WebConfigurationId == 1)
+                                        if (webInfo.WebConfigurationAccess == true && webInfo.CategoryId == 1)
                                         {
                                             foreach (var drugs in listDrugs)
                                             {
@@ -195,7 +196,7 @@ namespace ParentalControl.Web.Api.Controllers
                                             }
                                         }
 
-                                        if (webInfo.WebConfigurationAccess == true && webInfo.WebConfigurationId == 2)
+                                        if (webInfo.WebConfigurationAccess == true && webInfo.CategoryId == 2)
                                         {
                                             foreach (var adult in listAdult)
                                             {
@@ -211,7 +212,7 @@ namespace ParentalControl.Web.Api.Controllers
                                             }
                                         }
 
-                                        if (webInfo.WebConfigurationAccess == true && webInfo.WebConfigurationId == 3)
+                                        if (webInfo.WebConfigurationAccess == true && webInfo.CategoryId == 3)
                                         {
                                             foreach (var game in listGames)
                                             {
@@ -226,7 +227,7 @@ namespace ParentalControl.Web.Api.Controllers
                                                 break;
                                             }
                                         }
-                                        if (webInfo.WebConfigurationAccess == true && webInfo.WebConfigurationId == 4)
+                                        if (webInfo.WebConfigurationAccess == true && webInfo.CategoryId == 4)
                                         {
                                             foreach (var violence in listViolence)
                                             {
